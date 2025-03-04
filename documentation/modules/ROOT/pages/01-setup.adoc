@@ -9,20 +9,20 @@ During this tutorial, it will be required to work with different tools for runni
 
 include::partial$requirements.adoc[]
 
-NOTE: Please review the official documentation to install the latest versions of these tools on your laptop following the optimum procedure 
+NOTE: Please review the official documentation to install the latest versions of these tools on your laptop following the optimum procedure
 
-It is also required to have a https://github.com[GitHub] account in order to create some repositories during this tutorial.
+It is also required to have a https://github.com[GitHub,window=_blank] account in order to create some repositories during this tutorial.
 
 [#01-laboratory]
 == Laboratory
 
 The technical exercises included in this tutorial are based on cloud native solutions which are extensively used in the IT market. Please review the following list which includes the basics around these cloud native solutions:
 
-- https://github.com/[GitHub] is a provider of Internet hosting for software development and version control using Git. It offers the distributed version control and source code management functionality of Git, plus its own features.
-- https://docs.openshift.com/container-platform/[Red Hat Openshift Container Platform Cluster] is an enterprise-ready Kubernetes container platform with full-stack automated operations to manage hybrid cloud, multicloud, and edge deployments. Red Hat OpenShift is optimized to improve developer productivity and promote innovation.
-- https://argoproj.github.io/argo-cd/[ArgoCD] is a declarative, GitOps continuous delivery tool for Kubernetes following the GitOps pattern of using Git repositories as the source of truth for defining the desired application state. Argo CD automates the deployment of the desired application states in the specified target environments. Application deployments can track updates to branches, tags, or pinned to a specific version of manifests at a Git commit.
-- https://helm.sh/[Helm] is a tool to find, share, and use software built for Kubernetes. Helm helps users manage Kubernetes applications in terms of definition, installing, and upgrading even the most complex Kubernetes application.
-- https://tekton.dev/[Tekton] (Red Hat Pipelines Operator) is a powerful and flexible open-source framework for creating CI/CD systems, allowing developers to build, test, and deploy across cloud providers and on-premise systems.
+- https://github.com/[GitHub,window=_blank] is a provider of Internet hosting for software development and version control using Git. It offers the distributed version control and source code management functionality of Git, plus its own features.
+- https://docs.openshift.com/container-platform/[Red Hat Openshift Container Platform Cluster,window=_blank] is an enterprise-ready Kubernetes container platform with full-stack automated operations to manage hybrid cloud, multicloud, and edge deployments. Red Hat OpenShift is optimized to improve developer productivity and promote innovation.
+- https://argoproj.github.io/argo-cd/[ArgoCD,window=_blank] is a declarative, GitOps continuous delivery tool for Kubernetes following the GitOps pattern of using Git repositories as the source of truth for defining the desired application state. Argo CD automates the deployment of the desired application states in the specified target environments. Application deployments can track updates to branches, tags, or pinned to a specific version of manifests at a Git commit.
+- https://helm.sh/[Helm,window=_blank] is a tool to find, share, and use software built for Kubernetes. Helm helps users manage Kubernetes applications in terms of definition, installing, and upgrading even the most complex Kubernetes application.
+- https://tekton.dev/[Tekton,window=_blank] (Red Hat Pipelines Operator) is a powerful and flexible open-source framework for creating CI/CD systems, allowing developers to build, test, and deploy across cloud providers and on-premise systems.
 
 During this tutorial, a set of resources are provided by the instructor in order to be able to complete the exercises described in the following sections. The main objective of these resources is to provide a platform, multiple templates and other resources which are required to create different objects in Openshift.
 
@@ -32,13 +32,13 @@ Please review the following list to have an overall understanding about the reso
 - An ArgoCD installation which will allow attendees to deploy applications in a GitOps fashion
 - A Tekton installation that will control the applications lifecycle automatically
 - A set of GitHub repositories that include the templates and automatisms required to deploy a group of applications
-  - https://github.com/acidonper/jump-app-gitops[GitHub - Jump App GitOps Repository] 
-  - https://github.com/acidonper/jump-app-helm-charts[GitHub - Jump App Helm Charts]
+  - https://github.com/acidonper/jump-app-gitops[GitHub - Jump App GitOps Repository,window=_blank]
+  - https://github.com/acidonper/jump-app-helm-charts[GitHub - Jump App Helm Charts,window=_blank]
 
 [#01-parameters]
 === Parameters
 
-The instructor provides the users the necessary Openshift credentials and other important parameters at the beginning of this tutorial in order to access and complete the laboratory. 
+The instructor provides the users the necessary Openshift credentials and other important parameters at the beginning of this tutorial in order to access and complete the laboratory.
 
 The following table includes the parameters that the instructor should provide you at the beginning of the laboratory:
 
@@ -47,34 +47,34 @@ The following table includes the parameters that the instructor should provide y
 |**Name**|**Reference**|**Example**
 | Openshift Cluster API (Access CLI)
 | <ocp_cluster_api>
-| _https://api.cicdgitopsworkshop.sandbox507.opentlc.com:6443_
+| _https://api.cicdgitopsworkshop.sandbox507.opentlc.com:6443[window=_blank]_
 | Openshift Cluster Console
 | <ocp_cluster_console>
-| _https://console-openshift-console.apps.cicdgitopsworkshop.sandbox507.opentlc.com_
+| _https://console-openshift-console.apps.cicdgitopsworkshop.sandbox507.opentlc.com[window=_blank]_
 | Username
 | <username>
-| user1
+| userXX
 | Password
 | <pass>
 | P4ssw0rd
 | App Namespace
 | <user_namespace>
-| user1-jump-app
+| userXX-jump-app
 | CI/CD Namespace
 | <user_namespace_cicd>
-| user1-jump-app-cicd
+| userXX-jump-app-cicd
 | Openshift Apps Domain
 | <openshift_apps_domain>
 | _apps.cicdgitopsworkshop.sandbox507.opentlc.com_
 | ArgoCD console
 | <argocd_console_url>
-| _https://argocd-gitops-argocd.cicdgitopsworkshop.sandbox507.opentlc.com_
+| _https://argocd-gitops-argocd.cicdgitopsworkshop.sandbox507.opentlc.com[window=_blank]_
 | ArgoCD Project
 | <argocd_project>
 | jump-app
 | ArgoCD Openshift Cluster
 | <argocd_ocp_cluster_api>
-| _https://kubernetes.default.svc_
+| _https://kubernetes.default.svc[window=_blank]_
 |===
 
 [#01-accessoc]
@@ -92,7 +92,7 @@ oc login -u <user> -p <pass> <ocp_cluster_api>
 ----
 
 .OC CLI Login Output
-image::oc_login_output.png[]
+image::oc_login_output.png[link=assets/images/oc_login_output.png,window=_blank]
 
 TIP: Please pay special attention to _oc CLI_  because you will need to use this tool several times during this tutorial.
 
@@ -104,9 +104,12 @@ In addition, access Openshift Console using your credentials via browser in orde
 - <ocp_cluster_console> (_E.g. https://console-openshift-console.apps.cicdgitopsworkshop.sandbox507.opentlc.com_)
 
 .Openshift Console
-image::ocp_console.png[]
+image::ocp_console.png[link=assets/images/ocp_console.png,window=_blank]
 
 [#01-summary]
 == Summary
 
-The technologies and resources included on this page will allow you to deploy and operate a microservice-based application in Openshift. The main objective of deploying and operating this application in Openshift is to understand how GitOps and CI/CD strategies work together in order to speed up the application management processes.
+The technologies and resources included on this page will allow you to deploy and operate a microservice-based application in Openshift. +
+The main objective of deploying and operating this application in Openshift is to understand how *GitOps* and *CI/CD* strategies work together in order to speed up the application management processes.
+
+// EOF

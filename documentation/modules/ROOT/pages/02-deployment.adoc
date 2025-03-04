@@ -24,20 +24,20 @@ Please follow the next sections to make this new repository available.
 
 Regarding preparing this repository, you have a shared repository in GitHub ready to go. Please follow the next steps to copy this repository in your GitHub account in order to be able to operate it freely:
 
-* Login in https://github.com[GitHub]
+* Login in https://github.com[GitHub,window=_blank]
 
-* Access https://github.com/acidonper/jump-app-gitops[GitHub * Jump App GitOps Repository]
+* Access https://github.com/nveces/jump-app-gitops[GitHub * Jump App GitOps Repository,window=_blank]
 
 .Acidonper GitOps Repository
-image::github_acidonper.png[]
+image::github_acidonper.png[link=assets/images/github_acidonper.png,window=_blank]
 
 * Fork the repository
 
 .Acidonper GitOps Repository Fork
-image::github_gitops_fork.png[]
+image::github_gitops_fork.png[link=assets/images/github_gitops_fork.png,window=_blank]
 
 .Acidonper GitOps Repository Forked
-image::github_gitops_forked.png[]
+image::github_gitops_forked.png[link=assets/images/github_gitops_forked.png,window=_blank]
 
 [#02-repoclone]
 === Clone
@@ -49,13 +49,14 @@ Once you have your own GitOps repository in GitHub, it is time to clone it on yo
 [source,input,subs="+macros,+attributes"]
 ----
 cd ~
-git clone https://github.com/<github_user>/jump-app-gitops.git --recursive 
+git clone https://github.com/<github_user>/jump-app-gitops.git --recursive
 ----
 
-IMPORTANT: Replace *<github_user>* value with your GitHub username
+IMPORTANT: Replace *<github_user>* value with your GitHub username. +
+Example: `git clone https://github.com/nveces/jump-app-gitops.git --recursive`.
 
 .Student GitOps Repository Cloned
-image::github_gitops_cloned.png[]
+image::github_gitops_cloned.png[link=assets/images/github_gitops_cloned.png,window=_blank]
 
 [#02-deploy-cicd]
 == _Jump App_ CI/CD objects deployment
@@ -82,6 +83,8 @@ cd ~/jump-app-gitops
 ----
 git checkout -b "cicd"
 ----
+
+* Edit the `Chart.yaml` file. Modify:
 
 * Create Chart.yaml file
 
@@ -113,7 +116,17 @@ dependencies:
     condition: jump-app-argocd.enabled
 ----
 
-* Create values.yaml file modifying _jump-app-cicd.namespaceGitOps, _jump-app-cicd.namespaceDev_ and _global.appsDomain_ with *<username>* ,*<user_namespace>* and *<openshift_apps_domain>* parameters value respectively provided by the instructor:
+* Create `values.yaml` file modifying:
+** _jump-app-cicd.namespaceGitOps_, - *<username>-gitops-argocd*. Example: `user01-gitops-argocd`.
+** _jump-app-cicd.namespaceDev_ - *<username>-jump-app-dev*. Example: `user01-jump-app-dev`.
+** and _global.appsDomain_ with *<username>* ,
+
+[source]
+----
+namespaceGitOps: <username>-gitops-argocd
+----
+
+ and *<openshift_apps_domain>* parameters value respectively provided by the instructor:
 
 ----
 jump-app-micros:
@@ -203,7 +216,21 @@ git commit -m "Added Chart.yaml and values.yaml files"
 git push origin cicd
 ----
 
-IMPORTANT: It is required to generate a personal access token in order to push the changes via HTTPS 
+or
+
+[.lines_7]
+[.console-input]
+[source,input,subs="+macros,+attributes"]
+----
+git mv Chart.yaml.dep Chart.yaml
+git mv values.yaml.dep values.yaml
+git commit -m "Added Chart.yaml and values.yaml files"
+git push origin cicd
+----
+
+
+
+IMPORTANT: It is required to generate a personal access token in order to push the changes via HTTPS
 
 .Student CICD Branch Pushed
 image::github_cicd_pushed.png[]
@@ -361,7 +388,7 @@ jump-app-micros:
     mtls: true
   cicd:
     namespace: <user_namespace_cicd>
-  knative: 
+  knative:
     enabled: false
 
 # Global variables
@@ -370,7 +397,7 @@ global:
   apps:
     front-javascript:
       imagetag: develop
-      multiVersions: 
+      multiVersions:
         enabled: false
       replicas: 1
       envVars:
@@ -389,7 +416,7 @@ global:
       backend: back-golang
     back-golang:
       imagetag: develop
-      multiVersions: 
+      multiVersions:
         enabled: false
       replicas: 1
       envVars:
@@ -410,7 +437,7 @@ global:
         port: 8442
     back-python:
       imagetag: develop
-      multiVersions: 
+      multiVersions:
         enabled: false
       replicas: 1
       envVars:
@@ -431,7 +458,7 @@ global:
         port: 8444
     back-springboot:
       imagetag: develop
-      multiVersions: 
+      multiVersions:
         enabled: false
       replicas: 1
       envVars:

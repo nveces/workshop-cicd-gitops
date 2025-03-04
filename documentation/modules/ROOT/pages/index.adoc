@@ -9,9 +9,9 @@ _Red Hat Workshop CI/CD & GitOps_ is a repository which includes a tutorial with
 
 The general idea behind this workshop is to get an initial understanding of the following points:
 
-- Deploy microservice-based applications in Kubernetes using ArgoCD and Helm
-- Operate applications in Kubernetes using ArgoCD in a GitOps model
-- Implement Kubernetes Native CI/CD Pipelines strategy with Tekton
+- Deploy microservice-based applications in *Kubernetes* using *ArgoCD* and *Helm*
+- Operate applications in Kubernetes using *ArgoCD* in a *GitOps* model
+- Implement *Kubernetes Native CI/CD Pipelines* strategy with *Tekton*
 
 [.text-center.strong]
 == Getting Started
