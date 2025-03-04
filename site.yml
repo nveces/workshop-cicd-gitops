@@ -2,9 +2,9 @@ runtime:
   cache_dir: ./.cache/antora
 
 site:
-  title: Red Hat Workshop - CI/CD & GitOps
+  title: Workshop - CI/CD & GitOps
   url: http://localhost:3000/rhs-build-course/index.html
-  start_page: redhat-workshop-cicd-gitops::index.adoc
+  start_page: workshop-cicd-gitops::index.adoc
 
 content:
   sources:
