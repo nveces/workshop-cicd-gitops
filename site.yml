@@ -3,7 +3,7 @@ runtime:
 
 site:
   title: Workshop - CI/CD & GitOps
-  url: ttps://nveces.github.io/workshop-cicd-gitops/index.html
+  url: https://nveces.github.io/workshop-cicd-gitops/index.html
   start_page: workshop-cicd-gitops::index.adoc
 
 content:
