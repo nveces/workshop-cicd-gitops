@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Deployment Workflow :: Red Hat Workshop - CI/CD &amp; GitOps</title>
+    <link rel="canonical" href="http://localhost:3000/rhs-build-course/index.html/redhat-workshop-cicd-gitops/02-deployment.html">
+    <link rel="prev" href="01-setup.html">
+    <link rel="next" href="03-gitops.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://localhost:3000/rhs-build-course/index.html">Red Hat Workshop - CI/CD &amp; GitOps</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="redhat-workshop-cicd-gitops" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Red Hat Workshop - CI/CD &amp; GitOps</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-setup.html">1. Environment Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-setup.html#01-prerequisites">1.1 Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-setup.html#01-laboratory">1.2 Laboratory</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="01-setup.html#01-parameters">1.2.1 Parameters</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="01-setup.html#01-accessoc">1.2.2 Access - OC Client</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="01-setup.html#01-accessconsole">1.2.3 Access - OCP Console</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="01-setup.html#01-summary">1.2.4 Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-deployment.html">2. Deployment Workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#02-repo">2.1 Prepare <em>Jump App</em> repository</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#02-repofork">2.1.1 Fork</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#02-repoclone">2.1.2 Clone</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#02-deploy-cicd">2.2 <em>Jump App</em> CI/CD objects deployment</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#02-cicdrepoconfig">2.2.1 Prepare <em>CICD</em> config branch</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#02-deploy-cicd-obj">2.2.2 Deploy <em>Jump App</em> CI/CD objects via ArgoCD</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#02-deploy-jumpapp">2.3 <em>Jump App</em> objects deployment</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#02-gitopsrepo">2.3.1 Prepare <em>GitOps</em> config branch</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#02-deploy-jumpapp-obj">2.3.2 Deploy <em>Jump App</em> objects via ArgoCD</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#02-test">2.4 Confirm that <em>Jump App</em> is already running in Openshift</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-gitops.html">3. GitOps Workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-gitops.html#03-changegitops">3.1 Change GitOps repository content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-gitops.html#03-reviewargocd">3.2 Review Changes in ArgoCD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-gitops.html#03-reviewocp">3.3 Review Changes in Openshift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-gitops.html#03-test">3.4 Confirm that <em>Jump App</em> is already running in Openshift</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-cicd.html">4. CI/CD Workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-cicd.html#04-repo">4.1 Prepare <em>Jump App</em> Frontend custom repository</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-repofork">4.1.1 Fork</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-repoclone">4.1.2 Clone</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-cicd.html#04-changegitops">4.2 Change GitOps repository content</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-reviewargocd">4.2.1 Review Changes in ArgoCD</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-cicd.html#04-repoconfig">4.3 Customize your own <em>Jump App</em> Frontend</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-webhook">4.3.1 Configure GitHub Webhooks</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-makechange">4.3.2 Make some changes in the frontend</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-pipelinetriggered">4.3.3 Review Pipeline triggered by the webhook</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-fixpipeline">4.3.3 Solve the test problems</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-pipelinetriggeredagain">4.3.4 Review Pipeline triggered by the webhook again</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-cicd.html#04-test">4.4 Confirm that <em>Jump App</em> is already running in Openshift</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat Workshop - CI/CD &amp; GitOps</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Red Hat Workshop - CI/CD & GitOps</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Red Hat Workshop - CI/CD & GitOps</a></li>
+    <li><a href="02-deployment.html">2. Deployment Workflow</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/nveces/workshop-cicd-gitops/edit/master/documentation/modules/ROOT/pages/02-deployment.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Deployment Workflow</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the <em>Deployment Workflow</em> step you will prepare the CI/CD and GitOps repository in order to deploy <em>Jump App</em> application in Openshift using ArgoCD and Helm.</p>
+</div>
+<div class="paragraph">
+<p>It is important to bear in mind that about this repository:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The CI/CD part of this repository, branch, contains continuous integration and continuous objects definition required to deploy and integrate changes frecuently and automatically in <em>Jump App</em> (ImageStreams, BuildConfigs, Tekton Pipelines, etc).</p>
+</li>
+<li>
+<p>The GitOps part of this repository, branch, contains <em>Jump App</em> microservices objects definition required to make available <em>Jump App</em> (Deployments, Services, Routes, etc).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="02-repo"><a class="anchor" href="#02-repo"></a>Prepare <em>Jump App</em> repository</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>First of all, it is required to prepare the <em>GitOps</em> and <em>CI/CD</em> repository in order to allocate the following resources:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Helm Charts references</p>
+</li>
+<li>
+<p>A <em>values.yaml</em> file to make ArgoCD able to deploy <em>Jump App</em> in Openshift using helm charts referenced</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Please follow the next sections to make this new repository available.</p>
+</div>
+<div class="sect2">
+<h3 id="02-repofork"><a class="anchor" href="#02-repofork"></a>Fork</h3>
+<div class="paragraph">
+<p>Regarding preparing this repository, you have a shared repository in GitHub ready to go. Please follow the next steps to copy this repository in your GitHub account in order to be able to operate it freely:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Login in <a href="https://github.com" target="_blank" rel="noopener">GitHub</a></p>
+</li>
+<li>
+<p>Access <a href="https://github.com/nveces/jump-app-gitops" target="_blank" rel="noopener">GitHub * Jump App GitOps Repository</a></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="assets/images/github_acidonper.png" target="_blank" rel="noopener"><img src="_images/github_acidonper.png" alt="github acidonper"></a>
+</div>
+<div class="title">Figure 1. Acidonper GitOps Repository</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Fork the repository</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="assets/images/github_gitops_fork.png" target="_blank" rel="noopener"><img src="_images/github_gitops_fork.png" alt="github gitops fork"></a>
+</div>
+<div class="title">Figure 2. Acidonper GitOps Repository Fork</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="assets/images/github_gitops_forked.png" target="_blank" rel="noopener"><img src="_images/github_gitops_forked.png" alt="github gitops forked"></a>
+</div>
+<div class="title">Figure 3. Acidonper GitOps Repository Forked</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="02-repoclone"><a class="anchor" href="#02-repoclone"></a>Clone</h3>
+<div class="paragraph">
+<p>Once you have your own GitOps repository in GitHub, it is time to clone it on your laptop in order to start working.</p>
+</div>
+<div class="listingblock lines_7 console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">cd ~
+git clone <a href="https://github.com/&lt;github_user&gt;/jump-app-gitops.git" class="bare">https://github.com/&lt;github_user&gt;/jump-app-gitops.git</a> --recursive</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Replace <strong>&lt;github_user&gt;</strong> value with your GitHub username.<br>
+Example: <code>git clone <a href="https://github.com/nveces/jump-app-gitops.git" class="bare">https://github.com/nveces/jump-app-gitops.git</a> --recursive</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="assets/images/github_gitops_cloned.png" target="_blank" rel="noopener"><img src="_images/github_gitops_cloned.png" alt="github gitops cloned"></a>
+</div>
+<div class="title">Figure 4. Student GitOps Repository Cloned</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="02-deploy-cicd"><a class="anchor" href="#02-deploy-cicd"></a><em>Jump App</em> CI/CD objects deployment</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="02-cicdrepoconfig"><a class="anchor" href="#02-cicdrepoconfig"></a>Prepare <em>CI/CD</em> config branch</h3>
+<div class="paragraph">
+<p>Once the repository is forked, it is required to make some changes in this new repository in order to be able to deploy <em>Jump App</em> correctly in future steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Go to the repository folder</p>
+</li>
+</ul>
+</div>
+<div class="listingblock lines_7 console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">cd ~/jump-app-gitops</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create a new branch</p>
+</li>
+</ul>
+</div>
+<div class="listingblock lines_7 console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">git checkout -b "cicd"</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Edit the <code>Chart.yaml</code> file. Modify:</p>
+</li>
+<li>
+<p>Create Chart.yaml file</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: v2
+name: jump-app-cicd
+description: A Helm chart to deploy JumpApp CI/CD Objects for Kubernetes
+type: application
+
+version: 0.1.0
+appVersion: 0.1.16
+
+mantainers:
+  - name: Asier Cidon
+    email: acidonpe@redhat.com
+
+dependencies:
+  - name: jump-app-micros
+    repository: 'file://./charts/jump-app-micros'
+    version: 0.1.0
+    condition: jump-app-micros.enabled
+  - name: jump-app-cicd
+    repository: 'file://./charts/charts/jump-app-cicd'
+    version: 0.1.0
+    condition: jump-app-cicd.enabled
+  - name: jump-app-argocd
+    repository: 'file://./charts/charts/jump-app-argocd'
+    version: 0.1.0
+    condition: jump-app-argocd.enabled</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create <code>values.yaml</code> file modifying:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>jump-app-cicd.namespaceGitOps</em>, - <strong>&lt;username&gt;-gitops-argocd</strong>. Example: <code>user01-gitops-argocd</code>.</p>
+</li>
+<li>
+<p><em>jump-app-cicd.namespaceDev</em> - <strong>&lt;username&gt;-jump-app-dev</strong>. Example: <code>user01-jump-app-dev</code>.</p>
+</li>
+<li>
+<p>and <em>global.appsDomain</em> with <strong>&lt;username&gt;</strong> ,</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">namespaceGitOps: &lt;username&gt;-gitops-argocd</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>and *&lt;openshift_apps_domain&gt;* parameters value respectively provided by the instructor:</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>jump-app-micros:
+  enabled: false
+
+jump-app-argocd:
+  enabled: false
+
+jump-app-cicd:
+  enabled: true
+  namespaceDev: &lt;user_namespace&gt;
+  namespacePre: mock-value-pre
+  namespacePro: mock-value-pro
+  namespaceGitOps: &lt;username&gt;-gitops-argocd
+  functTestRepo: https://github.com/acidonper/jump-app-functional-tests.git
+  functTestRepoBranch: master
+  functTestMicro: front-javascript
+  pipeTypes:
+    - nodejs
+    - golang
+    - python
+    - java
+  gitBranchPro: master
+  gitBranchDev: develop
+  sa: tekton-deployments-admin
+
+# Global variables
+global:
+  appsDomain: &lt;openshift_apps_domain&gt;
+  # Jump microservices settings
+  apps:
+    front-javascript:
+      build: is
+      imagestream: nodejs:14-ubi8
+      imagestreamNamespace: openshift
+      versions:
+        - v1
+      type: nodejs
+      gitRepo: https://github.com/acidonper/jump-app-typescrypt-react.git
+    back-golang:
+      build: dockerfile
+      versions:
+        - v1
+      gitRepo: https://github.com/acidonper/jump-app-golang.git
+      type: golang
+    back-python:
+      build: is
+      imagestream: python:latest
+      imagestreamNamespace: openshift
+      versions:
+        - v1
+      gitRepo: https://github.com/acidonper/jump-app-python.git
+      type: python
+    back-springboot:
+      build: is
+      imagestream: java:latest
+      imagestreamNamespace: openshift
+      versions:
+        - v1
+      gitRepo: https://github.com/acidonper/jump-app-java-springboot.git
+      type: java</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Test our new files rendering this new helm chart</p>
+</li>
+</ul>
+</div>
+<div class="listingblock lines_7 console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">helm template . -f values.yaml --namespace &lt;user_namespace&gt;</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/github_cicd_test.png" alt="github cicd test">
+</div>
+<div class="title">Figure 5. Student CICD Chart rendering</div>
+</div>
+<div class="paragraph">
+<p>Once Chart.yaml and values.yaml are created and tested, it is required to push these new files to your repository.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Push files</p>
+</li>
+</ul>
+</div>
+<div class="listingblock lines_7 console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">git add Chart.yaml
+git add values.yaml
+git commit -m "Added Chart.yaml and values.yaml files"
+git push origin cicd</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or</p>
+</div>
+<div class="listingblock lines_7 console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">git mv Chart.yaml.dep Chart.yaml
+git mv values.yaml.dep values.yaml
+git commit -m "Added Chart.yaml and values.yaml files"
+git push origin cicd</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+It is required to generate a personal access token in order to push the changes via HTTPS
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/github_cicd_pushed.png" alt="github cicd pushed">
+</div>
+<div class="title">Figure 6. Student CICD Branch Pushed</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access your own GitOps repository, branch "cicd"</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/github_gitops_customized_cicd_1.png" alt="github gitops customized cicd 1">
+</div>
+<div class="title">Figure 7. Student GitOps Repository Customized</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/github_gitops_customized_cicd_2.png" alt="github gitops customized cicd 2">
+</div>
+<div class="title">Figure 8. Student GitOps Repository Customized</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="02-deploy-cicd-obj"><a class="anchor" href="#02-deploy-cicd-obj"></a>Deploy <em>Jump App</em> CI/CD objects via ArgoCD</h3>
+<div class="paragraph">
+<p>At this point, your should have a repository with a helm chart which is ready to deploy <em>Jump App</em> CI/CD Objects in Openshift through ArgoCD.</p>
+</div>
+<div class="paragraph">
+<p>Please follow the next steps to deploy <em>Jump App</em> CI/CD Objects:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access ArgoCD console &lt;argocd_console_url&gt; (*URL provided by the instructor at the beginning of this tutorial)</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_console_cicd.png" alt="argocd console cicd">
+</div>
+<div class="title">Figure 9. ArgoCD Console</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create a new App</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_new_app_cicd.png" alt="argocd new app cicd">
+</div>
+<div class="title">Figure 10. ArgoCD New App</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Field the following fields replacing <strong>&lt;username&gt;</strong>, <strong>&lt;argocd_project&gt;</strong>, <strong>&lt;github_user&gt;</strong>, <strong>&lt;argocd_ocp_cluster_api&gt;</strong> and <strong>&lt;user_namespace_cicd&gt;</strong> respective parameters provided by the instructor</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Application Name &#8594; <strong>&lt;username&gt;-jump-app-cicd</strong></p>
+</li>
+<li>
+<p>Project &#8594; <strong>&lt;argocd_project&gt;</strong></p>
+</li>
+<li>
+<p>Sync Policy &#8594; <strong>Manual</strong></p>
+</li>
+<li>
+<p>Repository URL &#8594; <strong><a href="https://github.com/&lt;github_user&gt;/jump-app-gitops.git" class="bare">https://github.com/&lt;github_user&gt;/jump-app-gitops.git</a></strong></p>
+</li>
+<li>
+<p>Revision &#8594; <strong>cicd</strong></p>
+</li>
+<li>
+<p>Path &#8594; <strong>.</strong></p>
+</li>
+<li>
+<p>Cluster URL &#8594; <strong>&lt;argocd_ocp_cluster_api&gt;</strong></p>
+</li>
+<li>
+<p>Namespace &#8594; <strong>&lt;user_namespace_cicd&gt;</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_new_app_fields_cicd.png" alt="argocd new app fields cicd">
+</div>
+<div class="title">Figure 11. ArgoCD New App Fields</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click on "CREATE"</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_new_app_create_cicd.png" alt="argocd new app create cicd">
+</div>
+<div class="title">Figure 12. ArgoCD New App Fields</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Once the new app is created, it is required to sync manually pressing on the <em>sync</em> button</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_jumpapp_sync_cicd.png" alt="argocd jumpapp sync cicd">
+</div>
+<div class="title">Figure 13. ArgoCD Jump App Sync</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_jumpapp_creating_cicd.png" alt="argocd jumpapp creating cicd">
+</div>
+<div class="title">Figure 14. ArgoCD Jump App Creating</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>After a few minutes, <em>Jump App</em> CI/CD health state will change to healthy</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_jumpapp_ok_cicd.png" alt="argocd jumpapp ok cicd">
+</div>
+<div class="title">Figure 15. ArgoCD Jump App CI/CD OK</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_jumpapp_content_1_cicd.png" alt="argocd jumpapp content 1 cicd">
+</div>
+<div class="title">Figure 16. ArgoCD Jump App CI/CD Content I</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_jumpapp_content_2_cicd.png" alt="argocd jumpapp content 2 cicd">
+</div>
+<div class="title">Figure 17. ArgoCD Jump App CI/CD Content II</div>
+</div>
+<div class="paragraph">
+<p>Once this step is completed, it is time to check the final resources which were created in Openshift by ArgoCD. For this checking, it is required to go to the Openshift Console, &lt;user_namespace_cicd&gt;  and review the following objects:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>BuildConfig and ImageStreams</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ocp_bcs.png" alt="ocp bcs">
+</div>
+<div class="title">Figure 18. OCP BuildConfig</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ocp_iss.png" alt="ocp iss">
+</div>
+<div class="title">Figure 19. OCP Imagestreams</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Pipelines</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ocp_pipelines.png" alt="ocp pipelines">
+</div>
+<div class="title">Figure 20. OCP Pipelines</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+ArgoCD allows admins to block or exclude some kubernetes objects in order to avoid some k8s objects management. If the ArgoCD installation does not handle <em>PipelineRun</em> it is required to execute all <strong>*-build-init-images</strong> manually at the first time.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ocp_pipelines_manual.png" alt="ocp pipelines manual">
+</div>
+<div class="title">Figure 21. OCP Pipelines Manually Execution</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/ocp_pipeline_manual_start.png" alt="ocp pipeline manual start">
+</div>
+<div class="title">Figure 22. OCP Pipelines Manually Execution Start</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Each <em>PipelineRun</em> should use the PVC that much his name.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="02-deploy-jumpapp"><a class="anchor" href="#02-deploy-jumpapp"></a><em>Jump App</em> objects deployment</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="02-gitopsrepo"><a class="anchor" href="#02-gitopsrepo"></a>Prepare <em>GitOps</em> config branch</h3>
+<div class="paragraph">
+<p>Lastly, it is required to make some changes in this new repository in order to be able to deploy <em>Jump App</em> correctly in future steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Go to the master branch again</p>
+</li>
+</ul>
+</div>
+<div class="listingblock lines_7 console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">git checkout master</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create Chart.yaml file</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: v2
+name: jump-app
+description: A Helm chart to deploy JumpApp for Kubernetes
+type: application
+
+version: 0.1.0
+appVersion: 0.1.16
+
+mantainers:
+  - name: Asier Cidon
+    email: acidonpe@redhat.com
+
+dependencies:
+  - name: jump-app-micros
+    repository: 'file://./charts/jump-app-micros'
+    version: 0.1.0
+    condition: jump-app-micros.enabled
+  - name: jump-app-cicd
+    repository: 'file://./charts/charts/jump-app-cicd'
+    version: 0.1.0
+    condition: jump-app-cicd.enabled
+  - name: jump-app-argocd
+    repository: 'file://./charts/charts/jump-app-argocd'
+    version: 0.1.0
+    condition: jump-app-argocd.enabled</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create values.yaml file modifying <em>jump-app-micros.cicd.namespace</em> and <em>global.appsDomain</em> with <strong>&lt;user_namespace_cicd&gt;</strong> and <strong>&lt;openshift_apps_domain&gt;</strong> parameters value respectively provided by the instructor:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># Chart variables
+jump-app-cicd:
+  enabled: false
+jump-app-argocd:
+  enabled: false
+jump-app-micros:
+  enabled: true
+  istio:
+    enabled: false
+    namespace: istio-system
+    mtls: true
+  cicd:
+    namespace: &lt;user_namespace_cicd&gt;
+  knative:
+    enabled: false
+
+# Global variables
+global:
+  appsDomain: &lt;openshift_apps_domain&gt;
+  apps:
+    front-javascript:
+      imagetag: develop
+      multiVersions:
+        enabled: false
+      replicas: 1
+      envVars:
+        APP_REF_NAME: jump-app
+      containerPorts:
+        http:
+          containerPort: 3000
+          protocol: TCP
+      servicePorts:
+        http-8080:
+          port: 8080
+          protocol: TCP
+          targetPort: 3000
+      public: true
+      routeTargetPort: http-8080
+      backend: back-golang
+    back-golang:
+      imagetag: develop
+      multiVersions:
+        enabled: false
+      replicas: 1
+      envVars:
+        APP_REF_NAME: jump-app
+      containerPorts:
+        http:
+          containerPort: 8442
+          protocol: TCP
+      servicePorts:
+        http-8442:
+          port: 8442
+          protocol: TCP
+          targetPort: 8442
+      public: true
+      routeTargetPort: http-8442
+      frontSettings:
+        var: REACT_APP_GOLANG
+        port: 8442
+    back-python:
+      imagetag: develop
+      multiVersions:
+        enabled: false
+      replicas: 1
+      envVars:
+        APP_REF_NAME: jump-app
+      containerPorts:
+        http:
+          containerPort: 8080
+          protocol: TCP
+      servicePorts:
+        http-8444:
+          port: 8444
+          protocol: TCP
+          targetPort: 8080
+      public: false
+      routeTargetPort: http-8444
+      frontSettings:
+        var: REACT_APP_PYTHON
+        port: 8444
+    back-springboot:
+      imagetag: develop
+      multiVersions:
+        enabled: false
+      replicas: 1
+      envVars:
+        APP_REF_NAME: jump-app
+      containerPorts:
+        http:
+          containerPort: 8080
+          protocol: TCP
+        https:
+          containerPort: 8443
+          protocol: TCP
+        service:
+          containerPort: 8778
+          protocol: TCP
+      servicePorts:
+        http-8080:
+          port: 8080
+          protocol: TCP
+          targetPort: 8080
+        http-8443:
+          port: 8443
+          protocol: TCP
+          targetPort: 8443
+        http-8778:
+          port: 8778
+          protocol: TCP
+          targetPort: 8778
+      public: false
+      routeTargetPort: http-8443
+      frontSettings:
+        var: REACT_APP_SPRINGBOOT
+        port: 8443</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Test our new files rendering this new helm chart</p>
+</li>
+</ul>
+</div>
+<div class="listingblock lines_7 console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">helm template . -f values.yaml --namespace &lt;user_namespace&gt;</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/github_gitops_test.png" alt="github gitops test">
+</div>
+<div class="title">Figure 23. Student GitOps Repository rendering</div>
+</div>
+<div class="paragraph">
+<p>Once Chart.yaml and values.yaml are created and tested, it is required to push these new files to your repository.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Push files</p>
+</li>
+</ul>
+</div>
+<div class="listingblock lines_7 console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">git add Chart.yaml
+git add values.yaml
+git commit -m "Added Chart.yaml and values.yaml files"
+git push origin master</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/github_gitops_pushed.png" alt="github gitops pushed">
+</div>
+<div class="title">Figure 24. Student GitOps Repository Pushed</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access your own GitOps repository</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/github_gitops_customized.png" alt="github gitops customized">
+</div>
+<div class="title">Figure 25. Student GitOps Repository Customized</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="02-deploy-jumpapp-obj"><a class="anchor" href="#02-deploy-jumpapp-obj"></a>Deploy <em>Jump App</em> objects via ArgoCD</h3>
+<div class="paragraph">
+<p>At this point, your should have a GitOps repository with a helm chart which is ready to deploy <em>Jump App</em> in Openshift through ArgoCD.</p>
+</div>
+<div class="paragraph">
+<p>Please follow the next steps to deploy <em>Jump App</em>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Access ArgoCD console &lt;argocd_console_url&gt; (*URL provided by the instructor at the beginning of this tutorial)</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_console.png" alt="argocd console">
+</div>
+<div class="title">Figure 26. ArgoCD Console</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create a new App</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_new_app.png" alt="argocd new app">
+</div>
+<div class="title">Figure 27. ArgoCD New App</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Field the following fields replacing <strong>&lt;username&gt;</strong>, <strong>&lt;argocd_project&gt;</strong>, <strong>&lt;github_user&gt;</strong>, <strong>&lt;argocd_ocp_cluster_api&gt;</strong> and <strong>&lt;user_namespace&gt;</strong> respective parameters provided by the instructor</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Application Name &#8594; <strong>&lt;username&gt;-jump-app-dev</strong></p>
+</li>
+<li>
+<p>Project &#8594; <strong>&lt;argocd_project&gt;</strong></p>
+</li>
+<li>
+<p>Sync Policy &#8594; <strong>Automatic</strong></p>
+</li>
+<li>
+<p>Repository URL &#8594; <strong><a href="https://github.com/&lt;github_user&gt;/jump-app-gitops.git" class="bare">https://github.com/&lt;github_user&gt;/jump-app-gitops.git</a></strong></p>
+</li>
+<li>
+<p>Revision &#8594; <strong>master</strong></p>
+</li>
+<li>
+<p>Path &#8594; <strong>.</strong></p>
+</li>
+<li>
+<p>Cluster URL &#8594; <strong>&lt;argocd_ocp_cluster_api&gt;</strong></p>
+</li>
+<li>
+<p>Namespace &#8594; <strong>&lt;user_namespace&gt;</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_new_app_fields.png" alt="argocd new app fields">
+</div>
+<div class="title">Figure 28. ArgoCD New App Fields</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click on "CREATE"</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_new_app_create.png" alt="argocd new app create">
+</div>
+<div class="title">Figure 29. ArgoCD New App Fields</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_jumpapp_creating.png" alt="argocd jumpapp creating">
+</div>
+<div class="title">Figure 30. ArgoCD Jump App Creating</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>After a minute, <em>Jump App</em> health state will change to healthy</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_jumpapp_ok.png" alt="argocd jumpapp ok">
+</div>
+<div class="title">Figure 31. ArgoCD Jump App OK</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_jumpapp_content_1.png" alt="argocd jumpapp content 1">
+</div>
+<div class="title">Figure 32. ArgoCD Jump App Content I</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/argocd_jumpapp_content_2.png" alt="argocd jumpapp content 2">
+</div>
+<div class="title">Figure 33. ArgoCD Jump App Content II</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="02-test"><a class="anchor" href="#02-test"></a>Confirm that <em>Jump App</em> is already running in Openshift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once <em>Jump App</em> objects have been created in Openshift through ArgoCD, it is required to follow the next steps in order to ensure your demo app is running properly:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Get pods</p>
+</li>
+</ul>
+</div>
+<div class="listingblock lines_7 console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">oc get pods -n &lt;user_namespace&gt;</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/jump_app_pods.png" alt="jump app pods">
+</div>
+<div class="title">Figure 34. Jump App Pods</div>
+</div>
+<div class="paragraph">
+<p>If <em>Jump App</em> is already running in Openshift, it is time to access <em>Jump App</em> public services in order to test the application:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Obtain external services URLs</p>
+</li>
+</ul>
+</div>
+<div class="listingblock lines_7 console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">oc get routes -n &lt;user_namespace&gt;</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/jump-app-routes.png" alt="jump app routes">
+</div>
+<div class="title">Figure 35. Jump App Routes</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Visit the <strong>back</strong>, <em>back-golang-v1-&lt;user_namespace&gt;.&lt;openshift_apps_domain&gt;</em>, route via your web browser</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/jump-app-back-ok.png" alt="jump app back ok">
+</div>
+<div class="title">Figure 36. Jump App Back</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Visit the <strong>front</strong>, <em>front-javascript-v1-&lt;user_namespace&gt;.&lt;openshift_apps_domain&gt;</em>, route via your web browser, push <strong>- JUMP-</strong> button and ensure the following message is displaying in your screen:</p>
+<div class="literalblock">
+<div class="content">
+<pre>...{"code":200,"message":"/jump - Greetings from Python!"}</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/jump-app-front-ok.png" alt="jump app front ok">
+</div>
+<div class="title">Figure 37. Jump App Frontend Web UI</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+It is required to accept <strong>self-signed certificates</strong> provided by Openshift
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/certs_warning.png" alt="certs warning" width="50%">
+</div>
+<div class="title">Figure 38. Openshift Self-signed Certificates Warning</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="01-setup.html">1. Environment Setup</a></span>
+  <span class="next"><a href="03-gitops.html">3. GitOps Workflow</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

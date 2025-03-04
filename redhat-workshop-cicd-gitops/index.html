@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Welcome to Red Hat Workshop - CI/CD &amp; GitOps :: Red Hat Workshop - CI/CD &amp; GitOps</title>
+    <link rel="canonical" href="http://localhost:3000/rhs-build-course/index.html/redhat-workshop-cicd-gitops/index.html">
+    <link rel="next" href="01-setup.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://localhost:3000/rhs-build-course/index.html">Red Hat Workshop - CI/CD &amp; GitOps</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="redhat-workshop-cicd-gitops" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Red Hat Workshop - CI/CD &amp; GitOps</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-setup.html">1. Environment Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-setup.html#01-prerequisites">1.1 Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-setup.html#01-laboratory">1.2 Laboratory</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="01-setup.html#01-parameters">1.2.1 Parameters</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="01-setup.html#01-accessoc">1.2.2 Access - OC Client</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="01-setup.html#01-accessconsole">1.2.3 Access - OCP Console</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="01-setup.html#01-summary">1.2.4 Summary</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-deployment.html">2. Deployment Workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-deployment.html#02-repo">2.1 Prepare <em>Jump App</em> repository</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-deployment.html#02-repofork">2.1.1 Fork</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-deployment.html#02-repoclone">2.1.2 Clone</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-deployment.html#02-deploy-cicd">2.2 <em>Jump App</em> CI/CD objects deployment</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-deployment.html#02-cicdrepoconfig">2.2.1 Prepare <em>CICD</em> config branch</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-deployment.html#02-deploy-cicd-obj">2.2.2 Deploy <em>Jump App</em> CI/CD objects via ArgoCD</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-deployment.html#02-deploy-jumpapp">2.3 <em>Jump App</em> objects deployment</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-deployment.html#02-gitopsrepo">2.3.1 Prepare <em>GitOps</em> config branch</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="02-deployment.html#02-deploy-jumpapp-obj">2.3.2 Deploy <em>Jump App</em> objects via ArgoCD</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-deployment.html#02-test">2.4 Confirm that <em>Jump App</em> is already running in Openshift</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-gitops.html">3. GitOps Workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-gitops.html#03-changegitops">3.1 Change GitOps repository content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-gitops.html#03-reviewargocd">3.2 Review Changes in ArgoCD</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-gitops.html#03-reviewocp">3.3 Review Changes in Openshift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-gitops.html#03-test">3.4 Confirm that <em>Jump App</em> is already running in Openshift</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-cicd.html">4. CI/CD Workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-cicd.html#04-repo">4.1 Prepare <em>Jump App</em> Frontend custom repository</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-repofork">4.1.1 Fork</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-repoclone">4.1.2 Clone</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-cicd.html#04-changegitops">4.2 Change GitOps repository content</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-reviewargocd">4.2.1 Review Changes in ArgoCD</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-cicd.html#04-repoconfig">4.3 Customize your own <em>Jump App</em> Frontend</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-webhook">4.3.1 Configure GitHub Webhooks</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-makechange">4.3.2 Make some changes in the frontend</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-pipelinetriggered">4.3.3 Review Pipeline triggered by the webhook</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-fixpipeline">4.3.3 Solve the test problems</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="04-cicd.html#04-pipelinetriggeredagain">4.3.4 Review Pipeline triggered by the webhook again</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-cicd.html#04-test">4.4 Confirm that <em>Jump App</em> is already running in Openshift</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat Workshop - CI/CD &amp; GitOps</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">Red Hat Workshop - CI/CD & GitOps</span>
+      <ul class="versions">
+        <li class="version is-current">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link is-current"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Red Hat Workshop - CI/CD & GitOps</a></li>
+    <li><a href="index.html">Welcome to Red Hat Workshop - CI/CD &amp; GitOps</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/nveces/workshop-cicd-gitops/edit/master/documentation/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Welcome to Red Hat Workshop - CI/CD &amp; GitOps</h1>
+<div class="sect1 text-center strong">
+<h2>Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Red Hat Workshop CI/CD &amp; GitOps</em> is a repository which includes a tutorial with a set of practices for the purpose of practicing with Kubernetes Native CI/CD pipelines in a GitOps model.</p>
+</div>
+<div class="paragraph">
+<p>The general idea behind this workshop is to get an initial understanding of the following points:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Deploy microservice-based applications in <strong>Kubernetes</strong> using <strong>ArgoCD</strong> and <strong>Helm</strong></p>
+</li>
+<li>
+<p>Operate applications in Kubernetes using <strong>ArgoCD</strong> in a <strong>GitOps</strong> model</p>
+</li>
+<li>
+<p>Implement <strong>Kubernetes Native CI/CD Pipelines</strong> strategy with <strong>Tekton</strong></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1 text-center strong">
+<h2>Getting Started</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>First of all, it is required to review your local machine prerequisites and laboratory environment access in order to be able to start working on this tutorial.</p>
+</div>
+<div class="paragraph">
+<p>Please follow <a href="01-setup.html" class="xref page">Getting Started</a> for more information.</p>
+</div>
+</div>
+</div>
+<div class="sect1 text-center strong">
+<h2>Tutorial Steps</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3>Deployment Workflow</h3>
+<div class="paragraph">
+<p>In this step, you will prepare a GitOps repository and deploy <em>Jump App</em> application in Openshift using ArgoCD and Helm.</p>
+</div>
+<div class="paragraph">
+<p><a href="02-deployment.html" class="xref page">Start this exercise&#8230;&#8203;</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3>GitOps Workflow</h3>
+<div class="paragraph">
+<p>In this step, you will make a change in your GitOps GitHub repository where application settings are located and then ArgoCD applies this configuration automatically.</p>
+</div>
+<div class="paragraph">
+<p><a href="03-gitops.html" class="xref page">Start this exercise&#8230;&#8203;</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3>CI/CD Workflow</h3>
+<div class="paragraph">
+<p>In this step, you will perform a set of tasks in order to understand and implement a CI/CD strategy:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Fork a <em>Jump App</em> microservice project in order to be able to make changes in the source code</p>
+</li>
+<li>
+<p>Change some <em>Jump App</em> microservices settings in a GitOps fashion</p>
+</li>
+<li>
+<p>Deploy a CI/CD project in Openshift</p>
+</li>
+<li>
+<p>Configure GitHub to notify your CI/CD project for changes</p>
+</li>
+<li>
+<p>Modify a microservice source code and integrate this new release in a continuous integration &amp; deployment way</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="04-cicd.html" class="xref page">Start this exercise&#8230;&#8203;</a></p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="next"><a href="01-setup.html">1. Environment Setup</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
