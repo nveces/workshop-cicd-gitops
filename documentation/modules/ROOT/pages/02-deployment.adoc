@@ -29,15 +29,15 @@ Regarding preparing this repository, you have a shared repository in GitHub read
 * Access https://github.com/nveces/jump-app-gitops[GitHub * Jump App GitOps Repository,window=_blank]
 
 .Acidonper GitOps Repository
-image::github_acidonper.png[link=assets/images/github_acidonper.png,window=_blank]
+image::github_acidonper.png[link=_images/github_acidonper.png,window=_blank]
 
 * Fork the repository
 
 .Acidonper GitOps Repository Fork
-image::github_gitops_fork.png[link=assets/images/github_gitops_fork.png,window=_blank]
+image::github_gitops_fork.png[link=_images/github_gitops_fork.png,window=_blank]
 
 .Acidonper GitOps Repository Forked
-image::github_gitops_forked.png[link=assets/images/github_gitops_forked.png,window=_blank]
+image::github_gitops_forked.png[link=_images/github_gitops_forked.png,window=_blank]
 
 [#02-repoclone]
 === Clone
@@ -56,7 +56,7 @@ IMPORTANT: Replace *<github_user>* value with your GitHub username. +
 Example: `git clone https://github.com/nveces/jump-app-gitops.git --recursive`.
 
 .Student GitOps Repository Cloned
-image::github_gitops_cloned.png[link=assets/images/github_gitops_cloned.png,window=_blank]
+image::github_gitops_cloned.png[link=_images/github_gitops_cloned.png,window=_blank]
 
 [#02-deploy-cicd]
 == _Jump App_ CI/CD objects deployment

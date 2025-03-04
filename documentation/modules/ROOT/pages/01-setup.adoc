@@ -92,7 +92,7 @@ oc login -u <user> -p <pass> <ocp_cluster_api>
 ----
 
 .OC CLI Login Output
-image::oc_login_output.png[link=assets/images/oc_login_output.png,window=_blank]
+image::oc_login_output.png[link=_images/oc_login_output.png,window=_blank]
 
 TIP: Please pay special attention to _oc CLI_  because you will need to use this tool several times during this tutorial.
 
@@ -104,7 +104,7 @@ In addition, access Openshift Console using your credentials via browser in orde
 - <ocp_cluster_console> (_E.g. https://console-openshift-console.apps.cicdgitopsworkshop.sandbox507.opentlc.com_)
 
 .Openshift Console
-image::ocp_console.png[link=assets/images/ocp_console.png,window=_blank]
+image::ocp_console.png[link=_images/ocp_console.png,window=_blank]
 
 [#01-summary]
 == Summary
