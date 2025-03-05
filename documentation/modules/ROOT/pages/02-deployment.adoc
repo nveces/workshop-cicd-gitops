@@ -55,6 +55,9 @@ git clone https://github.com/<github_user>/jump-app-gitops.git --recursive
 IMPORTANT: Replace *<github_user>* value with your GitHub username. +
 Example: `git clone https://github.com/nveces/jump-app-gitops.git --recursive`.
 
+.Student GitOps Repository Cloned
+image::github_gitops_cloned.png[link=_images/github_gitops_cloned.png,window=_blank]
+
 
 or if you prefer to use *SSH*, `git clone git@github.com:nveces/jump-app-gitops.git --recursive`.
 
@@ -79,8 +82,6 @@ Resolving deltas: 100% (635/635), done.
 Submodule path 'charts': checked out '94587f885b209b44c3a6b77bda66b7d2105c774d'
 ----
 
-.Student GitOps Repository Cloned
-image::github_gitops_cloned.png[link=_images/github_gitops_cloned.png,window=_blank]
 
 [#02-deploy-cicd]
 == _Jump App_ CI/CD objects deployment
@@ -111,7 +112,7 @@ git checkout -b "cicd"
 
 * Move `Chart.yaml.cicd` to `Chart.yaml`:
 
-[source]
+[source,bash,input,subs="+macros,+attributes"]
 ----
 $ git mv Chart.yaml.cicd Chart.yaml
 ----
@@ -148,7 +149,7 @@ dependencies:
 
 * Move `values.yaml.cicd` to `values.yaml`:
 
-[source]
+[source,bash,input,subs="+macros,+attributes"]
 ----
 $ git mv values.yaml.cicd values.yaml
 ----
@@ -156,7 +157,7 @@ $ git mv values.yaml.cicd values.yaml
 * Edit the `values.yaml` file. Modify the values respectively provided by the instructor (Parameters table):
 ** _jump-app-cicd.namespaceGitOps_, - *<username>-gitops-argocd*. Example: `user01-gitops-argocd`
 ** _jump-app-cicd.namespaceDev_ - *<username>-jump-app-dev*. Example: `user01-jump-app-dev`
-** and _global.appsDomain_ - It's the *<openshift_apps_domain>* parameter. +
+** _global.appsDomain_ - It's the *<openshift_apps_domain>* parameter. +
 Example:  *{openshift_apps_domain}*
 
 [source,yaml]
@@ -232,7 +233,8 @@ helm template . -f values.yaml --namespace <user_namespace>
 ----
 
 Example:
-[source,input,subs="+macros,+attributes"]
+
+[source,bash,input,subs="+macros,+attributes"]
 ----
 helm template . -f values.yaml --namespace user01-jump-app-dev
 ----
@@ -365,14 +367,14 @@ Lastly, it is required to make some changes in this new repository in order to b
 
 [.lines_7]
 [.console-input]
-[source,input,subs="+macros,+attributes"]
+[source,bash,input,subs="+macros,+attributes"]
 ----
 git checkout master
 ----
 
 * Move `Chart.yaml.master` to `Chart.yaml`:
 
-[source]
+[source,bash,input,subs="+macros,+attributes"]
 ----
 $ git mv Chart.yaml.master Chart.yaml
 ----
@@ -409,7 +411,7 @@ dependencies:
 
 * Move `values.yaml.master` to `values.yaml`:
 
-[source]
+[source,bash,input,subs="+macros,+attributes"]
 ----
 $ git mv values.yaml.master values.yaml
 ----
@@ -544,13 +546,14 @@ global:
 
 [.lines_7]
 [.console-input]
-[source,input,subs="+macros,+attributes"]
+[source,bash,input,subs="+macros,+attributes"]
 ----
 helm template . -f values.yaml --namespace <user_namespace>
 ----
 
 Example:
-[source,input,subs="+macros,+attributes"]
+
+[source,bash,input,subs="+macros,+attributes"]
 ----
 helm template . -f values.yaml --namespace user01-jump-app-dev
 ----

@@ -1,3 +1,7 @@
+////
+https://redhat-scholars.github.io/build-course/rhs-build-course/overview.html
+https://www.solutionpatterns.io/contribute/indepth-guide/
+////
 # Red Hat Workshop - CI/CD & GitOps
 
 ## Introduction

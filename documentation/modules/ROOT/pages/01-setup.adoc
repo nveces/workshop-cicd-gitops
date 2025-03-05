@@ -42,6 +42,8 @@ git version 2.48.1
 ====
 *Remember* to configure your Git account with your name and email address after to fork the repositories. This is important because Git uses this information to identify the author of the commits you create. You can configure your Git account using the following commands:
 
+[.lines_space]
+[.console-input]
 [source,bash]
 ----
 $ git config --local user.name "<Your Name>"
