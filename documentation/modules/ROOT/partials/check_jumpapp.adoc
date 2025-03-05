@@ -10,7 +10,7 @@ oc get pods -n <user_namespace>
 ----
 
 .Jump App Pods
-image::{imagepods}[]
+image::{imagepods}[link=_images/{imagepods},window=_blank]
 
 If _Jump App_ is already running in Openshift, it is time to access _Jump App_ public services in order to test the application:
 
@@ -20,25 +20,25 @@ If _Jump App_ is already running in Openshift, it is time to access _Jump App_ p
 [.console-input]
 [source,input,subs="+macros,+attributes"]
 ----
-oc get routes -n <user_namespace> 
+oc get routes -n <user_namespace>
 ----
 
 .Jump App Routes
-image::{imageroutes}[]
+image::{imageroutes}[link=_images/{imageroutes},window=_blank]
 
 - Visit the *back*, _back-golang-v1-<user_namespace>.<openshift_apps_domain>_, route via your web browser
 
 .Jump App Back
-image::jump-app-back-ok.png[]
+image::jump-app-back-ok.png[link=_images/jump-app-back-ok.png,window=_blank]
 
 - Visit the *front*, _front-javascript-v1-<user_namespace>.<openshift_apps_domain>_, route via your web browser, push *- JUMP-* button and ensure the following message is displaying in your screen:
 
  ...{"code":200,"message":"/jump - Greetings from Python!"}
 
 .Jump App Frontend Web UI
-image::jump-app-front-ok.png[]
+image::jump-app-front-ok.png[link=_images/jump-app-front-ok.png,window=_blank]
 
 IMPORTANT: It is required to accept *self-signed certificates* provided by Openshift
 
 .Openshift Self-signed Certificates Warning
-image::certs_warning.png[width=50%]
+image::certs_warning.png[link=_images/certs_warning.png,width=50%,window=_blank]

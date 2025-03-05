@@ -22,15 +22,15 @@ In order to work with a custom _Jump App_ frontend repository, you have a shared
 * Access https://github.com/acidonper/jump-app-typescrypt-react[GitHub - Jump App Frontend based on React Repository]
 
 .Acidonper _Jump App_ Frontend Repository
-image::github_acidonper.png[]
+image::github_acidonper.png[link=_images/github_acidonper.png,window=_blank]
 
 * Fork the repository
 
 .Acidonper _Jump App_ Frontend Repository Fork
-image::github_front_fork.png[]
+image::github_front_fork.png[link=_images/github_front_fork.png,window=_blank]
 
 .Acidonper _Jump App_ Frontend Repository Forked
-image::github_front_forked.png[]
+image::github_front_forked.png[link=_images/github_front_forked.png,window=_blank]
 
 [#04-repoclone]
 === Clone
@@ -48,7 +48,7 @@ git clone https://github.com/<github_user>/jump-app-typescrypt-react.git
 IMPORTANT: Replace *<github_user>* value with your GitHub username
 
 .Student _Jump App_ Frontend Repository Cloned
-image::github_front_cloned.png[]
+image::github_front_cloned.png[link=_images/github_front_cloned.png,window=_blank]
 
 [#04-changegitops]
 == Change GitOps repository content
@@ -84,7 +84,7 @@ git checkout cicd
 sed 's/https:\/\/github.com\/acidonper\/jump-app-typescrypt-react.git/https:\/\/github.com\/<github_user>\/jump-app-typescrypt-react.git/g' -i values.yaml
 ----
 
-IMPORTANT: Replace *<github_user>* value with your GitHub username 
+IMPORTANT: Replace *<github_user>* value with your GitHub username
 
 * Verify your own _Jump App_ Frontend repository has been defined properly
 
@@ -107,7 +107,7 @@ git push origin cicd
 ----
 
 .Student GitOps Repository Pushed
-image::github_cicd_pushed.png[]
+image::github_cicd_pushed.png[link=_images/github_cicd_pushed.png,window=_blank]
 
 [#04-reviewargocd]
 === Review Changes in ArgoCD
@@ -119,12 +119,12 @@ Once previous changes are pushed in the GitHub repository, you have to sync this
 * Once the new commit has been detected, it is required to sync manually pressing on the _sync_ button
 
 .ArgoCD Jump App CI/CD Sync
-image::argocd_jumpapp_sync_cicd_2.png[]
+image::argocd_jumpapp_sync_cicd_2.png[link=_images/argocd_jumpapp_sync_cicd_2.png,window=_blank]
 
 * After a few seconds, _Jump App_ health state will change to healthy
 
 .ArgoCD Sync Process Finished
-image::argocd_cicd_changed_2.png[]
+image::argocd_cicd_changed_2.png[link=_images/argocd_cicd_changed_2.png,window=_blank]
 
 
 [#04-repoconfig]
@@ -139,23 +139,23 @@ During this step, you will configure a GitHub Webhook in your own _Jump App_ Fro
 
 * Once inside, navigate to _Pipelines -> Triggers_ in order to ensure these objects are created
 
-.OCP Console Pipeline Triggers 
-image::ocp_pipeline_triggers.png[]
+.OCP Console Pipeline Triggers
+image::ocp_pipeline_triggers.png[link=_images/ocp_pipeline_triggers.png,window=_blank]
 
 * At this point, go to  _Networking -> Routes_ and copy *el-front-javascript* public URL
 
 .OCP Console listener-front-javascript-v1-deploy Trigger
-image::ocp_pipeline_triggers_javascript_url.png[]
+image::ocp_pipeline_triggers_javascript_url.png[link=_images/ocp_pipeline_triggers_javascript_url.png,window=_blank]
 
 * Access your own _Jump App_ Frontend repository settings in GitHub
 
 .GitHub Front repository settings
-image::github_front_settings.png[]
+image::github_front_settings.png[link=_images/github_front_settings.png,window=_blank]
 
 * Go to _Weebhooks -> Add weebhook_
 
 .GitHub Front repository settings
-image::github_front_settings_webhooks.png[]
+image::github_front_settings_webhooks.png[link=_images/github_front_settings_webhooks.png,window=_blank]
 
 * Field the following fields and press **[ Add webhook ]**
 
@@ -163,14 +163,14 @@ image::github_front_settings_webhooks.png[]
  ** Content type -> **application/json**
  ** Secret -> **s3cr3t-d@t@**
  ** SSL verification -> **False**
- 
+
 .GitHub Front repository settings
-image::github_front_settings_webhooks_fields.png[]
+image::github_front_settings_webhooks_fields.png[link=_images/github_front_settings_webhooks_fields.png,window=_blank]
 
 * Press F5 and review the webhook status is _ready_
 
 .GitHub Front repository settings
-image::github_front_settings_webhooks_ok.png[]
+image::github_front_settings_webhooks_ok.png[link=_images/github_front_settings_webhooks_ok.png,window=_blank]
 
 [#04-makechange]
 === Make some changes in the frontend
@@ -204,7 +204,7 @@ git checkout develop
 sed 's/Jump App v2.1 DEV/Jump App v.2.1 DEV - <username>/g' -i src/ui/header/Header.tsx
 ----
 
-IMPORTANT: Replace *<username>* value with your tutorial username 
+IMPORTANT: Replace *<username>* value with your tutorial username
 
 * Push changes to GitHub
 
@@ -218,7 +218,7 @@ git push origin develop
 ----
 
 .Student GitOps Repository Pushed
-image::github_front_pushed_2.png[]
+image::github_front_pushed_2.png[link=_images/github_front_pushed_2.png,window=_blank]
 
 
 [#04-pipelinetriggered]
@@ -233,15 +233,15 @@ Please follow the next steps in order to review the process launched:
 * Once inside, navigate to _Pipelines_ and the new pipeline triggered
 
 .OCP Pipeline Triggered
-image::ocp_pipeline_triggered.png[]
+image::ocp_pipeline_triggered.png[link=_images/ocp_pipeline_triggered.png,window=_blank]
 
 * After a few minutes, you obtain an **error** in the pipeline execution test step
 
 .OCP Pipeline Triggered Fail
-image::ocp_pipeline_triggered_error.png[]
+image::ocp_pipeline_triggered_error.png[link=_images/ocp_pipeline_triggered_error.png,window=_blank]
 
 .OCP Pipeline Triggered Error
-image::ocp_pipeline_triggered_error_2.png[]
+image::ocp_pipeline_triggered_error_2.png[link=_images/ocp_pipeline_triggered_error_2.png,window=_blank]
 
 [#04-fixpipeline]
 === Solve the test problems
@@ -277,7 +277,7 @@ git checkout -b develop
 sed 's/Jump App v2./Jump App v.2.1 DEV - <username>/g' -i src/ui/header/Header.spec.tsx
 ----
 
-IMPORTANT: Replace *<username>* value with your tutorial username 
+IMPORTANT: Replace *<username>* value with your tutorial username
 
 * Push changes to GitHub
 
@@ -291,7 +291,7 @@ git push origin develop
 ----
 
 .Student GitOps Repository Pushed
-image::github_front_pushed_2.png[]
+image::github_front_pushed_2.png[link=_images/github_front_pushed_2.png,window=_blank]
 
 
 [#04-pipelinetriggeredagain]
@@ -306,12 +306,12 @@ Please follow the next steps in order to review the process launched:
 * Once inside, navigate to _Pipelines_ and the new pipeline triggered
 
 .OCP Pipeline Trigerred
-image::ocp_pipeline_triggered.png[]
+image::ocp_pipeline_triggered.png[link=_images/ocp_pipeline_triggered.png,window=_blank]
 
 * After a few minutes, the pipeline execution finish with **Succeeded**
 
 .OCP Pipeline Trigerred OK
-image::ocp_pipeline_triggered_ok.png[]
+image::ocp_pipeline_triggered_ok.png[link=_images/ocp_pipeline_triggered_ok.png,window=_blank]
 
 [#04-test]
 == Confirm that _Jump App_ is already running in Openshift
@@ -323,5 +323,4 @@ After this process is finished, you should be able to visit your own _Jump App_ 
  ...{"code":200,"message":"/jump - Greetings from Python!"}
 
 .Jump App Frontend Web UI
-image::jump-app-front-ok-custom.png[]
-
+image::jump-app-front-ok-custom.png[link=_images/jump-app-front-ok-custom.png,window=_blank]

@@ -13,6 +13,45 @@ NOTE: Please review the official documentation to install the latest versions of
 
 It is also required to have a https://github.com[GitHub,window=_blank] account in order to create some repositories during this tutorial.
 
+
+Check the versions of the tools installed on your laptop using the following commands, for example:
+
+[source,bash]
+----
+$ helm version
+version.BuildInfo{Version:"v3.13.2+35.el9", GitCommit:"fa6e939d7984e1be0d6fbc2dc920b6bbcf395932", GitTreeState:"clean", GoVersion:"go1.20.12"}
+----
+
+[source,bash]
+----
+$ oc version
+Client Version: 4.15.14
+Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
+Server Version: 4.17.17
+Kubernetes Version: v1.30.7
+----
+
+[source,bash]
+----
+$ git -v
+git version 2.48.1
+----
+
+
+[IMPORTANT]
+====
+*Remember* to configure your Git account with your name and email address after to fork the repositories. This is important because Git uses this information to identify the author of the commits you create. You can configure your Git account using the following commands:
+
+[source,bash]
+----
+$ git config --local user.name "<Your Name>"
+$ git config --local user.email "<your email>"
+----
+
+====
+
+
+
 [#01-laboratory]
 == Laboratory
 
@@ -53,16 +92,16 @@ The following table includes the parameters that the instructor should provide y
 | _https://console-openshift-console.apps.cicdgitopsworkshop.sandbox507.opentlc.com[window=_blank]_
 | Username
 | <username>
-| userXX
+| `userXX`
 | Password
 | <pass>
-| P4ssw0rd
+| `P4ssw0rd`
 | App Namespace
 | <user_namespace>
-| userXX-jump-app
+| `userXX-jump-app-dev`
 | CI/CD Namespace
 | <user_namespace_cicd>
-| userXX-jump-app-cicd
+| `userXX-jump-app-cicd`
 | Openshift Apps Domain
 | <openshift_apps_domain>
 | _apps.cicdgitopsworkshop.sandbox507.opentlc.com_
@@ -101,7 +140,7 @@ TIP: Please pay special attention to _oc CLI_  because you will need to use this
 
 In addition, access Openshift Console using your credentials via browser in order to check connectivity and accessibility to the console:
 
-- <ocp_cluster_console> (_E.g. https://console-openshift-console.apps.cicdgitopsworkshop.sandbox507.opentlc.com_)
+- <ocp_cluster_console> (_E.g. https://console-openshift-console.apps.cicdgitopsworkshop.sandbox507.opentlc.com[window=_blank]_)
 
 .Openshift Console
 image::ocp_console.png[link=_images/ocp_console.png,window=_blank]
@@ -110,6 +149,9 @@ image::ocp_console.png[link=_images/ocp_console.png,window=_blank]
 == Summary
 
 The technologies and resources included on this page will allow you to deploy and operate a microservice-based application in Openshift. +
+
+[.blue .big]##The main objective## +
 The main objective of deploying and operating this application in Openshift is to understand how *GitOps* and *CI/CD* strategies work together in order to speed up the application management processes.
+
 
 // EOF

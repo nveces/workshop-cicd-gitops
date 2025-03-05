@@ -31,7 +31,7 @@ git push origin master
 ----
 
 .Student GitOps Repository Pushed
-image::github_gitops_pushed.png[]
+image::github_gitops_pushed.png[link=_images/github_gitops_pushed.png,window=_blank]
 
 [#03-reviewargocd]
 == Review Changes in ArgoCD
@@ -43,17 +43,17 @@ Once previous changes are pushed in the GitHub repository, ArgoCD automatically 
 * A new sync process is triggered automatically
 
 .ArgoCD Sync Process Triggered Automatically
-image::argocd_gitops_change.png[]
+image::argocd_gitops_change.png[link=_images/argocd_gitops_change.png,window=_blank]
 
 * After a few seconds, _Jump App_ health state will change to healthy
 
 .ArgoCD Sync Process Finished
-image::argocd_gitops_changed.png[]
+image::argocd_gitops_changed.png[link=_images/argocd_gitops_changed.png,window=_blank]
 
 * Take a look at sync process status
 
 .ArgoCD Sync Process Characteristics
-image::argocd_gitops_sync.png[]
+image::argocd_gitops_sync.png[link=_images/argocd_gitops_sync.png,window=_blank]
 
 [#03-reviewocp]
 == Review Changes in Openshift
@@ -65,25 +65,25 @@ Please follow the next steps to verify _Jump App_ microservices changes:
 * Access <ocp_cluster_console> (_E.g. https://console-openshift-console.apps.cicdgitopsworkshop.sandbox507.opentlc.com_)
 
 .Openshift Console
-image::ocp_console.png[]
+image::ocp_console.png[link=_images/ocp_console.png,window=_blank]
 
 .Openshift Developer View
-image::ocp_gitops_access.png[]
+image::ocp_gitops_access.png[link=_images/ocp_gitops_access.png,window=_blank]
 
 * Go to Administrator view
 
 .Openshift Administrator View
-image::ocp_gitops_admin_console.png[]
+image::ocp_gitops_admin_console.png[link=_images/ocp_gitops_admin_console.png,window=_blank]
 
-* Go to Deployments sections and notice that you have **2 of 2** pods instead of _1 of 1_ 
+* Go to Deployments sections and notice that you have **2 of 2** pods instead of _1 of 1_
 
 .Openshift Deployments Section
-image::ocp_gitops_deployments.png[]
+image::ocp_gitops_deployments.png[link=_images/ocp_gitops_deployments.png,window=_blank]
 
 * Review Pods creation date differences
 
 .Openshift Pods Section
-image::ocp_gitops_pods.png[]
+image::ocp_gitops_pods.png[link=_images/ocp_gitops_pods.png,window=_blank]
 
 [#03-test]
 == Confirm that _Jump App_ is already running in Openshift

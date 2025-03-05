@@ -6,16 +6,16 @@ In the _Deployment Workflow_ step you will prepare the CI/CD and GitOps reposito
 
 It is important to bear in mind that about this repository:
 
-* The CI/CD part of this repository, branch, contains continuous integration and continuous objects definition required to deploy and integrate changes frecuently and automatically in _Jump App_ (ImageStreams, BuildConfigs, Tekton Pipelines, etc).
-* The GitOps part of this repository, branch, contains _Jump App_ microservices objects definition required to make available _Jump App_ (Deployments, Services, Routes, etc).
+* The *CI/CD* part of this repository, branch, contains continuous integration and continuous objects definition required to deploy and integrate changes frecuently and automatically in _Jump App_ (ImageStreams, BuildConfigs, Tekton Pipelines, etc).
+* The *GitOps* part of this repository, branch, contains _Jump App_ microservices objects definition required to make available _Jump App_ (Deployments, Services, Routes, etc).
 
 [#02-repo]
 == Prepare _Jump App_ repository
 
 First of all, it is required to prepare the _GitOps_ and _CI/CD_ repository in order to allocate the following resources:
 
-* Helm Charts references
-* A _values.yaml_ file to make ArgoCD able to deploy _Jump App_ in Openshift using helm charts referenced
+* *Helm Charts* references
+* A _values.yaml_ file to make *ArgoCD* able to deploy _Jump App_ in Openshift using helm charts referenced
 
 Please follow the next sections to make this new repository available.
 
@@ -24,9 +24,9 @@ Please follow the next sections to make this new repository available.
 
 Regarding preparing this repository, you have a shared repository in GitHub ready to go. Please follow the next steps to copy this repository in your GitHub account in order to be able to operate it freely:
 
-* Login in https://github.com[GitHub,window=_blank]
+* Login in https://github.com[GitHub, window=_blank]
 
-* Access https://github.com/nveces/jump-app-gitops[GitHub * Jump App GitOps Repository,window=_blank]
+* Access https://github.com/nveces/jump-app-gitops[GitHub * Jump App GitOps Repository, window=_blank]
 
 .Acidonper GitOps Repository
 image::github_acidonper.png[link=_images/github_acidonper.png,window=_blank]
@@ -54,6 +54,30 @@ git clone https://github.com/<github_user>/jump-app-gitops.git --recursive
 
 IMPORTANT: Replace *<github_user>* value with your GitHub username. +
 Example: `git clone https://github.com/nveces/jump-app-gitops.git --recursive`.
+
+
+or if you prefer to use *SSH*, `git clone git@github.com:nveces/jump-app-gitops.git --recursive`.
+
+[source,bash]
+----
+$ git clone git@github.com:nveces/jump-app-gitops.git --recursive
+Cloning into 'jump-app-gitops'...
+remote: Enumerating objects: 635, done.
+remote: Counting objects: 100% (27/27), done.
+remote: Compressing objects: 100% (15/15), done.
+remote: Total 635 (delta 26), reused 12 (delta 12), pack-reused 608 (from 2)
+Receiving objects: 100% (635/635), 100.48 KiB | 612.00 KiB/s, done.
+Resolving deltas: 100% (340/340), done.
+Submodule 'charts' (https://github.com/acidonper/jump-app-helm-charts.git) registered for path 'charts'
+Cloning into '/nvme1n1p1/devspace/workspace/workshops/2025/cicd-gitops/jump-app-gitops/charts'...
+remote: Enumerating objects: 1033, done.
+remote: Counting objects: 100% (423/423), done.
+remote: Compressing objects: 100% (182/182), done.
+remote: Total 1033 (delta 273), reused 354 (delta 240), pack-reused 610 (from 1)
+Receiving objects: 100% (1033/1033), 150.97 KiB | 1.54 MiB/s, done.
+Resolving deltas: 100% (635/635), done.
+Submodule path 'charts': checked out '94587f885b209b44c3a6b77bda66b7d2105c774d'
+----
 
 .Student GitOps Repository Cloned
 image::github_gitops_cloned.png[link=_images/github_gitops_cloned.png,window=_blank]
@@ -84,9 +108,15 @@ cd ~/jump-app-gitops
 git checkout -b "cicd"
 ----
 
-* Edit the `Chart.yaml` file. Modify:
 
-* Create Chart.yaml file
+* Move `Chart.yaml.cicd` to `Chart.yaml`:
+
+[source]
+----
+$ git mv Chart.yaml.cicd Chart.yaml
+----
+
+* Now, the `Chart.yaml` file should look like this:
 
 ----
 apiVersion: v2
@@ -116,10 +146,18 @@ dependencies:
     condition: jump-app-argocd.enabled
 ----
 
-* Create `values.yaml` file modifying:
+* Move `values.yaml.cicd` to `values.yaml`:
+
+[source]
+----
+$ git mv values.yaml.cicd values.yaml
+----
+
+* Edit the `values.yaml` file. Modify:
 ** _jump-app-cicd.namespaceGitOps_, - *<username>-gitops-argocd*. Example: `user01-gitops-argocd`.
 ** _jump-app-cicd.namespaceDev_ - *<username>-jump-app-dev*. Example: `user01-jump-app-dev`.
 ** and _global.appsDomain_ with *<username>* ,
+
 
 [source]
 ----
@@ -200,7 +238,7 @@ helm template . -f values.yaml --namespace <user_namespace>
 ----
 
 .Student CICD Chart rendering
-image::github_cicd_test.png[]
+image::github_cicd_test.png[link=_images/github_cicd_test.png,window=_blank]
 
 Once Chart.yaml and values.yaml are created and tested, it is required to push these new files to your repository.
 
@@ -233,15 +271,15 @@ git push origin cicd
 IMPORTANT: It is required to generate a personal access token in order to push the changes via HTTPS
 
 .Student CICD Branch Pushed
-image::github_cicd_pushed.png[]
+image::github_cicd_pushed.png[link=_images/github_cicd_pushed.png,window=_blank]
 
 * Access your own GitOps repository, branch "cicd"
 
 .Student GitOps Repository Customized
-image::github_gitops_customized_cicd_1.png[]
+image::github_gitops_customized_cicd_1.png[link=_images/github_gitops_customized_cicd_1.png,window=_blank]
 
 .Student GitOps Repository Customized
-image::github_gitops_customized_cicd_2.png[]
+image::github_gitops_customized_cicd_2.png[link=_images/github_gitops_customized_cicd_2.png,window=_blank]
 
 [#02-deploy-cicd-obj]
 === Deploy _Jump App_ CI/CD objects via ArgoCD
@@ -253,12 +291,12 @@ Please follow the next steps to deploy _Jump App_ CI/CD Objects:
 * Access ArgoCD console <argocd_console_url> (*URL provided by the instructor at the beginning of this tutorial)
 
 .ArgoCD Console
-image::argocd_console_cicd.png[]
+image::argocd_console_cicd.png[link=_images/argocd_console_cicd.png,window=_blank]
 
 * Create a new App
 
 .ArgoCD New App
-image::argocd_new_app_cicd.png[]
+image::argocd_new_app_cicd.png[link=_images/argocd_new_app_cicd.png,window=_blank]
 
 * Field the following fields replacing **<username>**, **<argocd_project>**, **<github_user>**, **<argocd_ocp_cluster_api>** and **<user_namespace_cicd>** respective parameters provided by the instructor
 
@@ -272,31 +310,31 @@ image::argocd_new_app_cicd.png[]
  ** Namespace -> **<user_namespace_cicd>**
 
 .ArgoCD New App Fields
-image::argocd_new_app_fields_cicd.png[]
+image::argocd_new_app_fields_cicd.png[link=_images/argocd_new_app_fields_cicd.png,window=_blank]
 
 * Click on "CREATE"
 
 .ArgoCD New App Fields
-image::argocd_new_app_create_cicd.png[]
+image::argocd_new_app_create_cicd.png[link=_images/argocd_new_app_create_cicd.png,window=_blank]
 
 * Once the new app is created, it is required to sync manually pressing on the _sync_ button
 
 .ArgoCD Jump App Sync
-image::argocd_jumpapp_sync_cicd.png[]
+image::argocd_jumpapp_sync_cicd.png[link=_images/argocd_jumpapp_sync_cicd.png,window=_blank]
 
 .ArgoCD Jump App Creating
-image::argocd_jumpapp_creating_cicd.png[]
+image::argocd_jumpapp_creating_cicd.png[link=_images/argocd_jumpapp_creating_cicd.png,window=_blank]
 
 * After a few minutes, _Jump App_ CI/CD health state will change to healthy
 
 .ArgoCD Jump App CI/CD OK
-image::argocd_jumpapp_ok_cicd.png[]
+image::argocd_jumpapp_ok_cicd.png[link=_images/argocd_jumpapp_ok_cicd.png,window=_blank]
 
 .ArgoCD Jump App CI/CD Content I
-image::argocd_jumpapp_content_1_cicd.png[]
+image::argocd_jumpapp_content_1_cicd.png[link=_images/argocd_jumpapp_content_1_cicd.png,window=_blank]
 
 .ArgoCD Jump App CI/CD Content II
-image::argocd_jumpapp_content_2_cicd.png[]
+image::argocd_jumpapp_content_2_cicd.png[link=_images/argocd_jumpapp_content_2_cicd.png,window=_blank]
 
 
 Once this step is completed, it is time to check the final resources which were created in Openshift by ArgoCD. For this checking, it is required to go to the Openshift Console, <user_namespace_cicd>  and review the following objects:
@@ -304,23 +342,23 @@ Once this step is completed, it is time to check the final resources which were 
 * BuildConfig and ImageStreams
 
 .OCP BuildConfig
-image::ocp_bcs.png[]
+image::ocp_bcs.png[link=_images/ocp_bcs.png,window=_blank]
 
 .OCP Imagestreams
-image::ocp_iss.png[]
+image::ocp_iss.png[link=_images/ocp_iss.png,window=_blank]
 
 * Pipelines
 
 .OCP Pipelines
-image::ocp_pipelines.png[]
+image::ocp_pipelines.png[link=_images/ocp_pipelines.png,window=_blank]
 
 IMPORTANT: ArgoCD allows admins to block or exclude some kubernetes objects in order to avoid some k8s objects management. If the ArgoCD installation does not handle _PipelineRun_ it is required to execute all ***-build-init-images** manually at the first time.
 
 .OCP Pipelines Manually Execution
-image::ocp_pipelines_manual.png[]
+image::ocp_pipelines_manual.png[link=_images/ocp_pipelines_manual.png,window=_blank]
 
 .OCP Pipelines Manually Execution Start
-image::ocp_pipeline_manual_start.png[]
+image::ocp_pipeline_manual_start.png[link=_images/ocp_pipeline_manual_start.png,window=_blank]
 
 IMPORTANT: Each _PipelineRun_ should use the PVC that much his name.
 
@@ -503,7 +541,7 @@ helm template . -f values.yaml --namespace <user_namespace>
 ----
 
 .Student GitOps Repository rendering
-image::github_gitops_test.png[]
+image::github_gitops_test.png[link=_images/github_gitops_test.png,window=_blank]
 
 Once Chart.yaml and values.yaml are created and tested, it is required to push these new files to your repository.
 
@@ -520,12 +558,12 @@ git push origin master
 ----
 
 .Student GitOps Repository Pushed
-image::github_gitops_pushed.png[]
+image::github_gitops_pushed.png[link=_images/github_gitops_pushed.png,window=_blank]
 
 * Access your own GitOps repository
 
 .Student GitOps Repository Customized
-image::github_gitops_customized.png[]
+image::github_gitops_customized.png[link=_images/github_gitops_customized.png,window=_blank]
 
 [#02-deploy-jumpapp-obj]
 === Deploy _Jump App_ objects via ArgoCD
@@ -537,12 +575,12 @@ Please follow the next steps to deploy _Jump App_.
 * Access ArgoCD console <argocd_console_url> (*URL provided by the instructor at the beginning of this tutorial)
 
 .ArgoCD Console
-image::argocd_console.png[]
+image::argocd_console.png[link=_images/argocd_console.png,window=_blank]
 
 * Create a new App
 
 .ArgoCD New App
-image::argocd_new_app.png[]
+image::argocd_new_app.png[link=_images/argocd_new_app.png,window=_blank]
 
 * Field the following fields replacing **<username>**, **<argocd_project>**, **<github_user>**, **<argocd_ocp_cluster_api>** and **<user_namespace>** respective parameters provided by the instructor
 
@@ -556,26 +594,26 @@ image::argocd_new_app.png[]
  ** Namespace -> **<user_namespace>**
 
 .ArgoCD New App Fields
-image::argocd_new_app_fields.png[]
+image::argocd_new_app_fields.png[link=_images/argocd_new_app_fields.png,window=_blank]
 
 * Click on "CREATE"
 
 .ArgoCD New App Fields
-image::argocd_new_app_create.png[]
+image::argocd_new_app_create.png[link=_images/argocd_new_app_create.png,window=_blank]
 
 .ArgoCD Jump App Creating
-image::argocd_jumpapp_creating.png[]
+image::argocd_jumpapp_creating.png[link=_images/argocd_jumpapp_creating.png,window=_blank]
 
 * After a minute, _Jump App_ health state will change to healthy
 
 .ArgoCD Jump App OK
-image::argocd_jumpapp_ok.png[]
+image::argocd_jumpapp_ok.png[link=_images/argocd_jumpapp_ok.png,window=_blank]
 
 .ArgoCD Jump App Content I
-image::argocd_jumpapp_content_1.png[]
+image::argocd_jumpapp_content_1.png[link=_images/argocd_jumpapp_content_1.png,window=_blank]
 
 .ArgoCD Jump App Content II
-image::argocd_jumpapp_content_2.png[]
+image::argocd_jumpapp_content_2.png[link=_images/argocd_jumpapp_content_2.png,window=_blank]
 
 [#02-test]
 == Confirm that _Jump App_ is already running in Openshift
