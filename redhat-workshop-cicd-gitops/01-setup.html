@@ -289,6 +289,50 @@ Please review the official documentation to install the latest versions of these
 <div class="paragraph">
 <p>It is also required to have a <a href="https://github.com" target="_blank" rel="noopener">GitHub</a> account in order to create some repositories during this tutorial.</p>
 </div>
+<div class="paragraph">
+<p>Check the versions of the tools installed on your laptop using the following commands, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ helm version
+version.BuildInfo{Version:"v3.13.2+35.el9", GitCommit:"fa6e939d7984e1be0d6fbc2dc920b6bbcf395932", GitTreeState:"clean", GoVersion:"go1.20.12"}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc version
+Client Version: 4.15.14
+Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
+Server Version: 4.17.17
+Kubernetes Version: v1.30.7</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git -v
+git version 2.48.1</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Remember</strong> to configure your Git account with your name and email address after to fork the repositories. This is important because Git uses this information to identify the author of the commits you create. You can configure your Git account using the following commands:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git config --local user.name "&lt;Your Name&gt;"
+$ git config --local user.email "&lt;your email&gt;"</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -379,22 +423,22 @@ Please review the official documentation to install the latest versions of these
 <tr>
 <td class="tableblock halign-center valign-top"><p class="tableblock">Username</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&lt;username&gt;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">userXX</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>userXX</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top"><p class="tableblock">Password</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&lt;pass&gt;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">P4ssw0rd</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>P4ssw0rd</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top"><p class="tableblock">App Namespace</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&lt;user_namespace&gt;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">userXX-jump-app</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>userXX-jump-app-dev</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top"><p class="tableblock">CI/CD Namespace</p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock">&lt;user_namespace_cicd&gt;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">userXX-jump-app-cicd</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>userXX-jump-app-cicd</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top"><p class="tableblock">Openshift Apps Domain</p></td>
@@ -459,7 +503,7 @@ Please pay special attention to <em>oc CLI</em>  because you will need to use th
 <div class="ulist">
 <ul>
 <li>
-<p>&lt;ocp_cluster_console&gt; (<em>E.g. <a href="https://console-openshift-console.apps.cicdgitopsworkshop.sandbox507.opentlc.com" class="bare">https://console-openshift-console.apps.cicdgitopsworkshop.sandbox507.opentlc.com</a></em>)</p>
+<p>&lt;ocp_cluster_console&gt; (<em>E.g. <a href="https://console-openshift-console.apps.cicdgitopsworkshop.sandbox507.opentlc.com" class="bare" target="_blank" rel="noopener">https://console-openshift-console.apps.cicdgitopsworkshop.sandbox507.opentlc.com</a></em>)</p>
 </li>
 </ul>
 </div>
@@ -476,7 +520,10 @@ Please pay special attention to <em>oc CLI</em>  because you will need to use th
 <h2 id="01-summary"><a class="anchor" href="#01-summary"></a>Summary</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The technologies and resources included on this page will allow you to deploy and operate a microservice-based application in Openshift.<br>
+<p>The technologies and resources included on this page will allow you to deploy and operate a microservice-based application in Openshift.<br></p>
+</div>
+<div class="paragraph">
+<p><span class="blue  big">The main objective</span><br>
 The main objective of deploying and operating this application in Openshift is to understand how <strong>GitOps</strong> and <strong>CI/CD</strong> strategies work together in order to speed up the application management processes.</p>
 </div>
 </div>

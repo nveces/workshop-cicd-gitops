@@ -231,10 +231,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>The CI/CD part of this repository, branch, contains continuous integration and continuous objects definition required to deploy and integrate changes frecuently and automatically in <em>Jump App</em> (ImageStreams, BuildConfigs, Tekton Pipelines, etc).</p>
+<p>The <strong>CI/CD</strong> part of this repository, branch, contains continuous integration and continuous objects definition required to deploy and integrate changes frecuently and automatically in <em>Jump App</em> (ImageStreams, BuildConfigs, Tekton Pipelines, etc).</p>
 </li>
 <li>
-<p>The GitOps part of this repository, branch, contains <em>Jump App</em> microservices objects definition required to make available <em>Jump App</em> (Deployments, Services, Routes, etc).</p>
+<p>The <strong>GitOps</strong> part of this repository, branch, contains <em>Jump App</em> microservices objects definition required to make available <em>Jump App</em> (Deployments, Services, Routes, etc).</p>
 </li>
 </ul>
 </div>
@@ -249,10 +249,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Helm Charts references</p>
+<p><strong>Helm Charts</strong> references</p>
 </li>
 <li>
-<p>A <em>values.yaml</em> file to make ArgoCD able to deploy <em>Jump App</em> in Openshift using helm charts referenced</p>
+<p>A <em>values.yaml</em> file to make <strong>ArgoCD</strong> able to deploy <em>Jump App</em> in Openshift using helm charts referenced</p>
 </li>
 </ul>
 </div>
@@ -324,6 +324,30 @@ Example: <code>git clone <a href="https://github.com/nveces/jump-app-gitops.git"
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>or if you prefer to use <strong>SSH</strong>, <code>git clone <a href="mailto:git@github.com">git@github.com</a>:nveces/jump-app-gitops.git --recursive</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git clone git@github.com:nveces/jump-app-gitops.git --recursive
+Cloning into 'jump-app-gitops'...
+remote: Enumerating objects: 635, done.
+remote: Counting objects: 100% (27/27), done.
+remote: Compressing objects: 100% (15/15), done.
+remote: Total 635 (delta 26), reused 12 (delta 12), pack-reused 608 (from 2)
+Receiving objects: 100% (635/635), 100.48 KiB | 612.00 KiB/s, done.
+Resolving deltas: 100% (340/340), done.
+Submodule 'charts' (https://github.com/acidonper/jump-app-helm-charts.git) registered for path 'charts'
+Cloning into '/nvme1n1p1/devspace/workspace/workshops/2025/cicd-gitops/jump-app-gitops/charts'...
+remote: Enumerating objects: 1033, done.
+remote: Counting objects: 100% (423/423), done.
+remote: Compressing objects: 100% (182/182), done.
+remote: Total 1033 (delta 273), reused 354 (delta 240), pack-reused 610 (from 1)
+Receiving objects: 100% (1033/1033), 150.97 KiB | 1.54 MiB/s, done.
+Resolving deltas: 100% (635/635), done.
+Submodule path 'charts': checked out '94587f885b209b44c3a6b77bda66b7d2105c774d'</code></pre>
+</div>
+</div>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/github_gitops_cloned.png" target="_blank" rel="noopener"><img src="_images/github_gitops_cloned.png" alt="github gitops cloned"></a>
@@ -368,10 +392,19 @@ Example: <code>git clone <a href="https://github.com/nveces/jump-app-gitops.git"
 <div class="ulist">
 <ul>
 <li>
-<p>Edit the <code>Chart.yaml</code> file. Modify:</p>
+<p>Move <code>Chart.yaml.cicd</code> to <code>Chart.yaml</code>:</p>
 </li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">$ git mv Chart.yaml.cicd Chart.yaml</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p>Create Chart.yaml file</p>
+<p>Now, the <code>Chart.yaml</code> file should look like this:</p>
 </li>
 </ul>
 </div>
@@ -407,7 +440,19 @@ dependencies:
 <div class="ulist">
 <ul>
 <li>
-<p>Create <code>values.yaml</code> file modifying:</p>
+<p>Move <code>values.yaml.cicd</code> to <code>values.yaml</code>:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">$ git mv values.yaml.cicd values.yaml</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Edit the <code>values.yaml</code> file. Modify:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -511,7 +556,7 @@ global:
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/github_cicd_test.png" alt="github cicd test">
+<a class="image" href="_images/github_cicd_test.png" target="_blank" rel="noopener"><img src="_images/github_cicd_test.png" alt="github cicd test"></a>
 </div>
 <div class="title">Figure 5. Student CICD Chart rendering</div>
 </div>
@@ -558,7 +603,7 @@ It is required to generate a personal access token in order to push the changes 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/github_cicd_pushed.png" alt="github cicd pushed">
+<a class="image" href="_images/github_cicd_pushed.png" target="_blank" rel="noopener"><img src="_images/github_cicd_pushed.png" alt="github cicd pushed"></a>
 </div>
 <div class="title">Figure 6. Student CICD Branch Pushed</div>
 </div>
@@ -571,13 +616,13 @@ It is required to generate a personal access token in order to push the changes 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/github_gitops_customized_cicd_1.png" alt="github gitops customized cicd 1">
+<a class="image" href="_images/github_gitops_customized_cicd_1.png" target="_blank" rel="noopener"><img src="_images/github_gitops_customized_cicd_1.png" alt="github gitops customized cicd 1"></a>
 </div>
 <div class="title">Figure 7. Student GitOps Repository Customized</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/github_gitops_customized_cicd_2.png" alt="github gitops customized cicd 2">
+<a class="image" href="_images/github_gitops_customized_cicd_2.png" target="_blank" rel="noopener"><img src="_images/github_gitops_customized_cicd_2.png" alt="github gitops customized cicd 2"></a>
 </div>
 <div class="title">Figure 8. Student GitOps Repository Customized</div>
 </div>
@@ -599,7 +644,7 @@ It is required to generate a personal access token in order to push the changes 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_console_cicd.png" alt="argocd console cicd">
+<a class="image" href="_images/argocd_console_cicd.png" target="_blank" rel="noopener"><img src="_images/argocd_console_cicd.png" alt="argocd console cicd"></a>
 </div>
 <div class="title">Figure 9. ArgoCD Console</div>
 </div>
@@ -612,7 +657,7 @@ It is required to generate a personal access token in order to push the changes 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_new_app_cicd.png" alt="argocd new app cicd">
+<a class="image" href="_images/argocd_new_app_cicd.png" target="_blank" rel="noopener"><img src="_images/argocd_new_app_cicd.png" alt="argocd new app cicd"></a>
 </div>
 <div class="title">Figure 10. ArgoCD New App</div>
 </div>
@@ -653,7 +698,7 @@ It is required to generate a personal access token in order to push the changes 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_new_app_fields_cicd.png" alt="argocd new app fields cicd">
+<a class="image" href="_images/argocd_new_app_fields_cicd.png" target="_blank" rel="noopener"><img src="_images/argocd_new_app_fields_cicd.png" alt="argocd new app fields cicd"></a>
 </div>
 <div class="title">Figure 11. ArgoCD New App Fields</div>
 </div>
@@ -666,7 +711,7 @@ It is required to generate a personal access token in order to push the changes 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_new_app_create_cicd.png" alt="argocd new app create cicd">
+<a class="image" href="_images/argocd_new_app_create_cicd.png" target="_blank" rel="noopener"><img src="_images/argocd_new_app_create_cicd.png" alt="argocd new app create cicd"></a>
 </div>
 <div class="title">Figure 12. ArgoCD New App Fields</div>
 </div>
@@ -679,13 +724,13 @@ It is required to generate a personal access token in order to push the changes 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_jumpapp_sync_cicd.png" alt="argocd jumpapp sync cicd">
+<a class="image" href="_images/argocd_jumpapp_sync_cicd.png" target="_blank" rel="noopener"><img src="_images/argocd_jumpapp_sync_cicd.png" alt="argocd jumpapp sync cicd"></a>
 </div>
 <div class="title">Figure 13. ArgoCD Jump App Sync</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_jumpapp_creating_cicd.png" alt="argocd jumpapp creating cicd">
+<a class="image" href="_images/argocd_jumpapp_creating_cicd.png" target="_blank" rel="noopener"><img src="_images/argocd_jumpapp_creating_cicd.png" alt="argocd jumpapp creating cicd"></a>
 </div>
 <div class="title">Figure 14. ArgoCD Jump App Creating</div>
 </div>
@@ -698,19 +743,19 @@ It is required to generate a personal access token in order to push the changes 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_jumpapp_ok_cicd.png" alt="argocd jumpapp ok cicd">
+<a class="image" href="_images/argocd_jumpapp_ok_cicd.png" target="_blank" rel="noopener"><img src="_images/argocd_jumpapp_ok_cicd.png" alt="argocd jumpapp ok cicd"></a>
 </div>
 <div class="title">Figure 15. ArgoCD Jump App CI/CD OK</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_jumpapp_content_1_cicd.png" alt="argocd jumpapp content 1 cicd">
+<a class="image" href="_images/argocd_jumpapp_content_1_cicd.png" target="_blank" rel="noopener"><img src="_images/argocd_jumpapp_content_1_cicd.png" alt="argocd jumpapp content 1 cicd"></a>
 </div>
 <div class="title">Figure 16. ArgoCD Jump App CI/CD Content I</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_jumpapp_content_2_cicd.png" alt="argocd jumpapp content 2 cicd">
+<a class="image" href="_images/argocd_jumpapp_content_2_cicd.png" target="_blank" rel="noopener"><img src="_images/argocd_jumpapp_content_2_cicd.png" alt="argocd jumpapp content 2 cicd"></a>
 </div>
 <div class="title">Figure 17. ArgoCD Jump App CI/CD Content II</div>
 </div>
@@ -726,13 +771,13 @@ It is required to generate a personal access token in order to push the changes 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/ocp_bcs.png" alt="ocp bcs">
+<a class="image" href="_images/ocp_bcs.png" target="_blank" rel="noopener"><img src="_images/ocp_bcs.png" alt="ocp bcs"></a>
 </div>
 <div class="title">Figure 18. OCP BuildConfig</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/ocp_iss.png" alt="ocp iss">
+<a class="image" href="_images/ocp_iss.png" target="_blank" rel="noopener"><img src="_images/ocp_iss.png" alt="ocp iss"></a>
 </div>
 <div class="title">Figure 19. OCP Imagestreams</div>
 </div>
@@ -745,7 +790,7 @@ It is required to generate a personal access token in order to push the changes 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/ocp_pipelines.png" alt="ocp pipelines">
+<a class="image" href="_images/ocp_pipelines.png" target="_blank" rel="noopener"><img src="_images/ocp_pipelines.png" alt="ocp pipelines"></a>
 </div>
 <div class="title">Figure 20. OCP Pipelines</div>
 </div>
@@ -763,13 +808,13 @@ ArgoCD allows admins to block or exclude some kubernetes objects in order to avo
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/ocp_pipelines_manual.png" alt="ocp pipelines manual">
+<a class="image" href="_images/ocp_pipelines_manual.png" target="_blank" rel="noopener"><img src="_images/ocp_pipelines_manual.png" alt="ocp pipelines manual"></a>
 </div>
 <div class="title">Figure 21. OCP Pipelines Manually Execution</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/ocp_pipeline_manual_start.png" alt="ocp pipeline manual start">
+<a class="image" href="_images/ocp_pipeline_manual_start.png" target="_blank" rel="noopener"><img src="_images/ocp_pipeline_manual_start.png" alt="ocp pipeline manual start"></a>
 </div>
 <div class="title">Figure 22. OCP Pipelines Manually Execution Start</div>
 </div>
@@ -985,7 +1030,7 @@ global:
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/github_gitops_test.png" alt="github gitops test">
+<a class="image" href="_images/github_gitops_test.png" target="_blank" rel="noopener"><img src="_images/github_gitops_test.png" alt="github gitops test"></a>
 </div>
 <div class="title">Figure 23. Student GitOps Repository rendering</div>
 </div>
@@ -1009,7 +1054,7 @@ git push origin master</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/github_gitops_pushed.png" alt="github gitops pushed">
+<a class="image" href="_images/github_gitops_pushed.png" target="_blank" rel="noopener"><img src="_images/github_gitops_pushed.png" alt="github gitops pushed"></a>
 </div>
 <div class="title">Figure 24. Student GitOps Repository Pushed</div>
 </div>
@@ -1022,7 +1067,7 @@ git push origin master</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/github_gitops_customized.png" alt="github gitops customized">
+<a class="image" href="_images/github_gitops_customized.png" target="_blank" rel="noopener"><img src="_images/github_gitops_customized.png" alt="github gitops customized"></a>
 </div>
 <div class="title">Figure 25. Student GitOps Repository Customized</div>
 </div>
@@ -1044,7 +1089,7 @@ git push origin master</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_console.png" alt="argocd console">
+<a class="image" href="_images/argocd_console.png" target="_blank" rel="noopener"><img src="_images/argocd_console.png" alt="argocd console"></a>
 </div>
 <div class="title">Figure 26. ArgoCD Console</div>
 </div>
@@ -1057,7 +1102,7 @@ git push origin master</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_new_app.png" alt="argocd new app">
+<a class="image" href="_images/argocd_new_app.png" target="_blank" rel="noopener"><img src="_images/argocd_new_app.png" alt="argocd new app"></a>
 </div>
 <div class="title">Figure 27. ArgoCD New App</div>
 </div>
@@ -1098,7 +1143,7 @@ git push origin master</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_new_app_fields.png" alt="argocd new app fields">
+<a class="image" href="_images/argocd_new_app_fields.png" target="_blank" rel="noopener"><img src="_images/argocd_new_app_fields.png" alt="argocd new app fields"></a>
 </div>
 <div class="title">Figure 28. ArgoCD New App Fields</div>
 </div>
@@ -1111,13 +1156,13 @@ git push origin master</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_new_app_create.png" alt="argocd new app create">
+<a class="image" href="_images/argocd_new_app_create.png" target="_blank" rel="noopener"><img src="_images/argocd_new_app_create.png" alt="argocd new app create"></a>
 </div>
 <div class="title">Figure 29. ArgoCD New App Fields</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_jumpapp_creating.png" alt="argocd jumpapp creating">
+<a class="image" href="_images/argocd_jumpapp_creating.png" target="_blank" rel="noopener"><img src="_images/argocd_jumpapp_creating.png" alt="argocd jumpapp creating"></a>
 </div>
 <div class="title">Figure 30. ArgoCD Jump App Creating</div>
 </div>
@@ -1130,19 +1175,19 @@ git push origin master</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_jumpapp_ok.png" alt="argocd jumpapp ok">
+<a class="image" href="_images/argocd_jumpapp_ok.png" target="_blank" rel="noopener"><img src="_images/argocd_jumpapp_ok.png" alt="argocd jumpapp ok"></a>
 </div>
 <div class="title">Figure 31. ArgoCD Jump App OK</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_jumpapp_content_1.png" alt="argocd jumpapp content 1">
+<a class="image" href="_images/argocd_jumpapp_content_1.png" target="_blank" rel="noopener"><img src="_images/argocd_jumpapp_content_1.png" alt="argocd jumpapp content 1"></a>
 </div>
 <div class="title">Figure 32. ArgoCD Jump App Content I</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd_jumpapp_content_2.png" alt="argocd jumpapp content 2">
+<a class="image" href="_images/argocd_jumpapp_content_2.png" target="_blank" rel="noopener"><img src="_images/argocd_jumpapp_content_2.png" alt="argocd jumpapp content 2"></a>
 </div>
 <div class="title">Figure 33. ArgoCD Jump App Content II</div>
 </div>
@@ -1169,7 +1214,7 @@ git push origin master</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/jump_app_pods.png" alt="jump app pods">
+<a class="image" href="_images/jump_app_pods.png" target="_blank" rel="noopener"><img src="_images/jump_app_pods.png" alt="jump app pods"></a>
 </div>
 <div class="title">Figure 34. Jump App Pods</div>
 </div>
@@ -1190,7 +1235,7 @@ git push origin master</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/jump-app-routes.png" alt="jump app routes">
+<a class="image" href="_images/jump-app-routes.png" target="_blank" rel="noopener"><img src="_images/jump-app-routes.png" alt="jump app routes"></a>
 </div>
 <div class="title">Figure 35. Jump App Routes</div>
 </div>
@@ -1203,7 +1248,7 @@ git push origin master</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/jump-app-back-ok.png" alt="jump app back ok">
+<a class="image" href="_images/jump-app-back-ok.png" target="_blank" rel="noopener"><img src="_images/jump-app-back-ok.png" alt="jump app back ok"></a>
 </div>
 <div class="title">Figure 36. Jump App Back</div>
 </div>
@@ -1221,7 +1266,7 @@ git push origin master</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/jump-app-front-ok.png" alt="jump app front ok">
+<a class="image" href="_images/jump-app-front-ok.png" target="_blank" rel="noopener"><img src="_images/jump-app-front-ok.png" alt="jump app front ok"></a>
 </div>
 <div class="title">Figure 37. Jump App Frontend Web UI</div>
 </div>
@@ -1239,7 +1284,7 @@ It is required to accept <strong>self-signed certificates</strong> provided by O
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/certs_warning.png" alt="certs warning" width="50%">
+<a class="image" href="_images/certs_warning.png" target="_blank" rel="noopener"><img src="_images/certs_warning.png" alt="certs warning" width="50%"></a>
 </div>
 <div class="title">Figure 38. Openshift Self-signed Certificates Warning</div>
 </div>
