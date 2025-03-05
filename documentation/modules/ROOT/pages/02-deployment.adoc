@@ -63,7 +63,7 @@ or if you prefer to use *SSH*, `git clone git@github.com:nveces/jump-app-gitops.
 
 [source,bash]
 ----
-$ git clone git@github.com:nveces/jump-app-gitops.git --recursive
+git clone git@github.com:nveces/jump-app-gitops.git --recursive
 Cloning into 'jump-app-gitops'...
 remote: Enumerating objects: 635, done.
 remote: Counting objects: 100% (27/27), done.
@@ -110,13 +110,13 @@ git checkout -b "cicd"
 ----
 
 
-* Move `Chart.yaml.cicd` to `Chart.yaml`:
+* Copy `Chart.yaml.cicd` to `Chart.yaml`:
 
 [.lines_7]
 [.console-input]
 [source,bash,input,subs="+macros,+attributes"]
 ----
-$ git mv Chart.yaml.cicd Chart.yaml
+cp Chart.yaml.cicd Chart.yaml
 ----
 
 * Now, the `Chart.yaml` file should look like this:
@@ -149,13 +149,13 @@ dependencies:
     condition: jump-app-argocd.enabled
 ----
 
-* Move `values.yaml.cicd` to `values.yaml`:
+* Copy `values.yaml.cicd` to `values.yaml`:
 
 [.lines_7]
 [.console-input]
 [source,bash,input,subs="+macros,+attributes"]
 ----
-$ git mv values.yaml.cicd values.yaml
+cp values.yaml.cicd values.yaml
 ----
 
 * Edit the `values.yaml` file. Modify the values respectively provided by the instructor (Parameters table):
@@ -197,7 +197,7 @@ global:
   apps:
     front-javascript:
       build: is
-      imagestream: nodejs:14-ubi8
+      imagestream: nodejs:18-ubi8
       imagestreamNamespace: openshift
       versions:
         - v1
@@ -256,6 +256,7 @@ Once `Chart.yaml` and `values.yaml` are created and tested, it is required to pu
 [.console-input]
 [source,input,subs="+macros,+attributes"]
 ----
+git add Chart.yaml
 git add values.yaml
 git commit -m "Added Chart.yaml and values.yaml files"
 git push origin cicd
@@ -378,13 +379,13 @@ Lastly, it is required to make some changes in this new repository in order to b
 git checkout master
 ----
 
-* Move `Chart.yaml.master` to `Chart.yaml`:
+* Copy `Chart.yaml.master` to `Chart.yaml`:
 
 [.lines_7]
 [.console-input]
 [source,bash,input,subs="+macros,+attributes"]
 ----
-$ git mv Chart.yaml.master Chart.yaml
+cp Chart.yaml.master Chart.yaml
 ----
 
 * Now, the `Chart.yaml` file should look
@@ -417,13 +418,13 @@ dependencies:
     condition: jump-app-argocd.enabled
 ----
 
-* Move `values.yaml.master` to `values.yaml`:
+* Copy `values.yaml.master` to `values.yaml`:
 
 [.lines_7]
 [.console-input]
 [source,bash,input,subs="+macros,+attributes"]
 ----
-$ git mv values.yaml.master values.yaml
+cp values.yaml.master values.yaml
 ----
 
 
@@ -581,6 +582,7 @@ Once `Chart.yaml` and `values.yaml` are created and tested, it is required to pu
 [.console-input]
 [source,bash,input,subs="+macros,+attributes"]
 ----
+git add Chart.yaml
 git add values.yaml
 git commit -m "Added Chart.yaml and values.yaml files"
 git push origin master
