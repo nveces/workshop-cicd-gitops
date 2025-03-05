@@ -112,6 +112,8 @@ git checkout -b "cicd"
 
 * Move `Chart.yaml.cicd` to `Chart.yaml`:
 
+[.lines_7]
+[.console-input]
 [source,bash,input,subs="+macros,+attributes"]
 ----
 $ git mv Chart.yaml.cicd Chart.yaml
@@ -149,6 +151,8 @@ dependencies:
 
 * Move `values.yaml.cicd` to `values.yaml`:
 
+[.lines_7]
+[.console-input]
 [source,bash,input,subs="+macros,+attributes"]
 ----
 $ git mv values.yaml.cicd values.yaml
@@ -234,6 +238,8 @@ helm template . -f values.yaml --namespace <user_namespace>
 
 Example:
 
+[.lines_7]
+[.console-input]
 [source,bash,input,subs="+macros,+attributes"]
 ----
 helm template . -f values.yaml --namespace user01-jump-app-dev
@@ -374,6 +380,8 @@ git checkout master
 
 * Move `Chart.yaml.master` to `Chart.yaml`:
 
+[.lines_7]
+[.console-input]
 [source,bash,input,subs="+macros,+attributes"]
 ----
 $ git mv Chart.yaml.master Chart.yaml
@@ -411,6 +419,8 @@ dependencies:
 
 * Move `values.yaml.master` to `values.yaml`:
 
+[.lines_7]
+[.console-input]
 [source,bash,input,subs="+macros,+attributes"]
 ----
 $ git mv values.yaml.master values.yaml
@@ -553,6 +563,8 @@ helm template . -f values.yaml --namespace <user_namespace>
 
 Example:
 
+[.lines_7]
+[.console-input]
 [source,bash,input,subs="+macros,+attributes"]
 ----
 helm template . -f values.yaml --namespace user01-jump-app-dev
