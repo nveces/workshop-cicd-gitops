@@ -324,6 +324,12 @@ Example: <code>git clone <a href="https://github.com/nveces/jump-app-gitops.git"
 </tr>
 </table>
 </div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="_images/github_gitops_cloned.png" target="_blank" rel="noopener"><img src="_images/github_gitops_cloned.png" alt="github gitops cloned"></a>
+</div>
+<div class="title">Figure 4. Student GitOps Repository Cloned</div>
+</div>
 <div class="paragraph">
 <p>or if you prefer to use <strong>SSH</strong>, <code>git clone <a href="mailto:git@github.com">git@github.com</a>:nveces/jump-app-gitops.git --recursive</code>.</p>
 </div>
@@ -347,12 +353,6 @@ Receiving objects: 100% (1033/1033), 150.97 KiB | 1.54 MiB/s, done.
 Resolving deltas: 100% (635/635), done.
 Submodule path 'charts': checked out '94587f885b209b44c3a6b77bda66b7d2105c774d'</code></pre>
 </div>
-</div>
-<div class="imageblock">
-<div class="content">
-<a class="image" href="_images/github_gitops_cloned.png" target="_blank" rel="noopener"><img src="_images/github_gitops_cloned.png" alt="github gitops cloned"></a>
-</div>
-<div class="title">Figure 4. Student GitOps Repository Cloned</div>
 </div>
 </div>
 </div>
@@ -398,7 +398,7 @@ Submodule path 'charts': checked out '94587f885b209b44c3a6b77bda66b7d2105c774d'<
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">$ git mv Chart.yaml.cicd Chart.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git mv Chart.yaml.cicd Chart.yaml</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -446,7 +446,7 @@ dependencies:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">$ git mv values.yaml.cicd values.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git mv values.yaml.cicd values.yaml</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -462,7 +462,7 @@ dependencies:
 <p><em>jump-app-cicd.namespaceDev</em> - <strong>&lt;username&gt;-jump-app-dev</strong>. Example: <code>user01-jump-app-dev</code></p>
 </li>
 <li>
-<p>and <em>global.appsDomain</em> - It&#8217;s the <strong>&lt;openshift_apps_domain&gt;</strong> parameter.<br>
+<p><em>global.appsDomain</em> - It&#8217;s the <strong>&lt;openshift_apps_domain&gt;</strong> parameter.<br>
 Example:  <strong>apps.cluster-4kh56.dynamic.redhatworkshops.io</strong></p>
 </li>
 </ul>
@@ -550,7 +550,7 @@ global:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">helm template . -f values.yaml --namespace user01-jump-app-dev</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm template . -f values.yaml --namespace user01-jump-app-dev</code></pre>
 </div>
 </div>
 <div class="imageblock">
@@ -843,7 +843,7 @@ Each <em>PipelineRun</em> should use the PVC that much his name.
 </div>
 <div class="listingblock lines_7 console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">git checkout master</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git checkout master</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -855,7 +855,7 @@ Each <em>PipelineRun</em> should use the PVC that much his name.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">$ git mv Chart.yaml.master Chart.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git mv Chart.yaml.master Chart.yaml</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -903,7 +903,7 @@ dependencies:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">$ git mv values.yaml.master values.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git mv values.yaml.master values.yaml</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -1053,7 +1053,7 @@ global:
 </div>
 <div class="listingblock lines_7 console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">helm template . -f values.yaml --namespace &lt;user_namespace&gt;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm template . -f values.yaml --namespace &lt;user_namespace&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1061,7 +1061,7 @@ global:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">helm template . -f values.yaml --namespace user01-jump-app-dev</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">helm template . -f values.yaml --namespace user01-jump-app-dev</code></pre>
 </div>
 </div>
 <div class="imageblock">
