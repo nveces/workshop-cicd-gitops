@@ -335,7 +335,7 @@ Example: <code>git clone <a href="https://github.com/nveces/jump-app-gitops.git"
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git clone git@github.com:nveces/jump-app-gitops.git --recursive
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone git@github.com:nveces/jump-app-gitops.git --recursive
 Cloning into 'jump-app-gitops'...
 remote: Enumerating objects: 635, done.
 remote: Counting objects: 100% (27/27), done.
@@ -392,13 +392,13 @@ Submodule path 'charts': checked out '94587f885b209b44c3a6b77bda66b7d2105c774d'<
 <div class="ulist">
 <ul>
 <li>
-<p>Move <code>Chart.yaml.cicd</code> to <code>Chart.yaml</code>:</p>
+<p>Copy <code>Chart.yaml.cicd</code> to <code>Chart.yaml</code>:</p>
 </li>
 </ul>
 </div>
 <div class="listingblock lines_7 console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git mv Chart.yaml.cicd Chart.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cp Chart.yaml.cicd Chart.yaml</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -440,13 +440,13 @@ dependencies:
 <div class="ulist">
 <ul>
 <li>
-<p>Move <code>values.yaml.cicd</code> to <code>values.yaml</code>:</p>
+<p>Copy <code>values.yaml.cicd</code> to <code>values.yaml</code>:</p>
 </li>
 </ul>
 </div>
 <div class="listingblock lines_7 console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git mv values.yaml.cicd values.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cp values.yaml.cicd values.yaml</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -503,7 +503,7 @@ global:
   apps:
     front-javascript:
       build: is
-      imagestream: nodejs:14-ubi8
+      imagestream: nodejs:18-ubi8
       imagestreamNamespace: openshift
       versions:
         - v1
@@ -571,7 +571,8 @@ global:
 </div>
 <div class="listingblock lines_7 console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">git add values.yaml
+<pre class="highlightjs highlight"><code class="language-input hljs" data-lang="input">git add Chart.yaml
+git add values.yaml
 git commit -m "Added Chart.yaml and values.yaml files"
 git push origin cicd</code></pre>
 </div>
@@ -849,13 +850,13 @@ Each <em>PipelineRun</em> should use the PVC that much his name.
 <div class="ulist">
 <ul>
 <li>
-<p>Move <code>Chart.yaml.master</code> to <code>Chart.yaml</code>:</p>
+<p>Copy <code>Chart.yaml.master</code> to <code>Chart.yaml</code>:</p>
 </li>
 </ul>
 </div>
 <div class="listingblock lines_7 console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git mv Chart.yaml.master Chart.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cp Chart.yaml.master Chart.yaml</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -897,13 +898,13 @@ dependencies:
 <div class="ulist">
 <ul>
 <li>
-<p>Move <code>values.yaml.master</code> to <code>values.yaml</code>:</p>
+<p>Copy <code>values.yaml.master</code> to <code>values.yaml</code>:</p>
 </li>
 </ul>
 </div>
 <div class="listingblock lines_7 console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ git mv values.yaml.master values.yaml</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cp values.yaml.master values.yaml</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -1082,7 +1083,8 @@ global:
 </div>
 <div class="listingblock lines_7 console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git add values.yaml
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git add Chart.yaml
+git add values.yaml
 git commit -m "Added Chart.yaml and values.yaml files"
 git push origin master</code></pre>
 </div>
