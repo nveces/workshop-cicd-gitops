@@ -153,19 +153,13 @@ dependencies:
 $ git mv values.yaml.cicd values.yaml
 ----
 
-* Edit the `values.yaml` file. Modify:
-** _jump-app-cicd.namespaceGitOps_, - *<username>-gitops-argocd*. Example: `user01-gitops-argocd`.
-** _jump-app-cicd.namespaceDev_ - *<username>-jump-app-dev*. Example: `user01-jump-app-dev`.
-** and _global.appsDomain_ with *<username>* ,
+* Edit the `values.yaml` file. Modify the values respectively provided by the instructor (Parameters table):
+** _jump-app-cicd.namespaceGitOps_, - *<username>-gitops-argocd*. Example: `user01-gitops-argocd`
+** _jump-app-cicd.namespaceDev_ - *<username>-jump-app-dev*. Example: `user01-jump-app-dev`
+** and _global.appsDomain_ - It's the *<openshift_apps_domain>* parameter. +
+Example:  *{openshift_apps_domain}*
 
-
-[source]
-----
-namespaceGitOps: <username>-gitops-argocd
-----
-
- and *<openshift_apps_domain>* parameters value respectively provided by the instructor:
-
+[source,yaml]
 ----
 jump-app-micros:
   enabled: false
@@ -237,10 +231,16 @@ global:
 helm template . -f values.yaml --namespace <user_namespace>
 ----
 
+Example:
+[source,input,subs="+macros,+attributes"]
+----
+helm template . -f values.yaml --namespace user01-jump-app-dev
+----
+
 .Student CICD Chart rendering
 image::github_cicd_test.png[link=_images/github_cicd_test.png,window=_blank]
 
-Once Chart.yaml and values.yaml are created and tested, it is required to push these new files to your repository.
+Once `Chart.yaml` and `values.yaml` are created and tested, it is required to push these new files to your repository.
 
 * Push files
 
@@ -248,20 +248,7 @@ Once Chart.yaml and values.yaml are created and tested, it is required to push t
 [.console-input]
 [source,input,subs="+macros,+attributes"]
 ----
-git add Chart.yaml
 git add values.yaml
-git commit -m "Added Chart.yaml and values.yaml files"
-git push origin cicd
-----
-
-or
-
-[.lines_7]
-[.console-input]
-[source,input,subs="+macros,+attributes"]
-----
-git mv Chart.yaml.dep Chart.yaml
-git mv values.yaml.dep values.yaml
 git commit -m "Added Chart.yaml and values.yaml files"
 git push origin cicd
 ----
@@ -288,7 +275,7 @@ At this point, your should have a repository with a helm chart which is ready to
 
 Please follow the next steps to deploy _Jump App_ CI/CD Objects:
 
-* Access ArgoCD console <argocd_console_url> (*URL provided by the instructor at the beginning of this tutorial)
+* Access *ArgoCD console* <argocd_console_url> (URL provided by the instructor at the beginning of this tutorial)
 
 .ArgoCD Console
 image::argocd_console_cicd.png[link=_images/argocd_console_cicd.png,window=_blank]
@@ -300,17 +287,18 @@ image::argocd_new_app_cicd.png[link=_images/argocd_new_app_cicd.png,window=_blan
 
 * Field the following fields replacing **<username>**, **<argocd_project>**, **<github_user>**, **<argocd_ocp_cluster_api>** and **<user_namespace_cicd>** respective parameters provided by the instructor
 
- ** Application Name -> **<username>-jump-app-cicd**
- ** Project -> **<argocd_project>**
+ ** Application Name -> **<username>-jump-app-cicd** -> `user01-jump-app-cicd`
+ ** Project -> **<argocd_project>** -> `{argocd_project}`
  ** Sync Policy -> **Manual**
  ** Repository URL -> **https://github.com/<github_user>/jump-app-gitops.git**
  ** Revision -> **cicd**
  ** Path -> **.**
- ** Cluster URL -> **<argocd_ocp_cluster_api>**
- ** Namespace -> **<user_namespace_cicd>**
+ ** Cluster URL -> **<argocd_ocp_cluster_api>** -> *https://kubernetes.default.svc*
+ ** Namespace -> **<user_namespace_cicd>** -> **<username>-jump-app-cicd** -> `user01-jump-app-cicd`
 
 .ArgoCD New App Fields
 image::argocd_new_app_fields_cicd.png[link=_images/argocd_new_app_fields_cicd.png,window=_blank]
+
 
 * Click on "CREATE"
 
@@ -336,6 +324,8 @@ image::argocd_jumpapp_content_1_cicd.png[link=_images/argocd_jumpapp_content_1_c
 .ArgoCD Jump App CI/CD Content II
 image::argocd_jumpapp_content_2_cicd.png[link=_images/argocd_jumpapp_content_2_cicd.png,window=_blank]
 
+.ArgoCD Jump App CI/CD Details
+image::argocd_app_cicd_details_01.png[link=_images/argocd_app_cicd_details_01.png,window=_blank]
 
 Once this step is completed, it is time to check the final resources which were created in Openshift by ArgoCD. For this checking, it is required to go to the Openshift Console, <user_namespace_cicd>  and review the following objects:
 
@@ -380,7 +370,14 @@ Lastly, it is required to make some changes in this new repository in order to b
 git checkout master
 ----
 
-* Create Chart.yaml file
+* Move `Chart.yaml.master` to `Chart.yaml`:
+
+[source]
+----
+$ git mv Chart.yaml.master Chart.yaml
+----
+
+* Now, the `Chart.yaml` file should look
 
 ----
 apiVersion: v2
@@ -410,8 +407,20 @@ dependencies:
     condition: jump-app-argocd.enabled
 ----
 
-* Create values.yaml file modifying _jump-app-micros.cicd.namespace_ and _global.appsDomain_ with *<user_namespace_cicd>* and *<openshift_apps_domain>* parameters value respectively provided by the instructor:
+* Move `values.yaml.master` to `values.yaml`:
 
+[source]
+----
+$ git mv values.yaml.master values.yaml
+----
+
+
+* Edit the `values.yaml` file. Modify the values respectively provided by the instructor (Parameters table):
+** _jump-app-micros.cicd.namespace_ - *<user_namespace_cicd>* -> Example: `user01-jump-app-cicd`
+** _global.appsDomain_ - It's the *<openshift_apps_domain>* parameter. +
+Example:  *{openshift_apps_domain}*
+
+[source,yaml]
 ----
 # Chart variables
 jump-app-cicd:
@@ -540,18 +549,23 @@ global:
 helm template . -f values.yaml --namespace <user_namespace>
 ----
 
+Example:
+[source,input,subs="+macros,+attributes"]
+----
+helm template . -f values.yaml --namespace user01-jump-app-dev
+----
+
 .Student GitOps Repository rendering
 image::github_gitops_test.png[link=_images/github_gitops_test.png,window=_blank]
 
-Once Chart.yaml and values.yaml are created and tested, it is required to push these new files to your repository.
+Once `Chart.yaml` and `values.yaml` are created and tested, it is required to push these new files to your repository.
 
 * Push files
 
 [.lines_7]
 [.console-input]
-[source,input,subs="+macros,+attributes"]
+[source,bash,input,subs="+macros,+attributes"]
 ----
-git add Chart.yaml
 git add values.yaml
 git commit -m "Added Chart.yaml and values.yaml files"
 git push origin master
@@ -572,7 +586,7 @@ At this point, your should have a GitOps repository with a helm chart which is r
 
 Please follow the next steps to deploy _Jump App_.
 
-* Access ArgoCD console <argocd_console_url> (*URL provided by the instructor at the beginning of this tutorial)
+* Access *ArgoCD console* <argocd_console_url> (URL provided by the instructor at the beginning of this tutorial)
 
 .ArgoCD Console
 image::argocd_console.png[link=_images/argocd_console.png,window=_blank]
@@ -584,14 +598,16 @@ image::argocd_new_app.png[link=_images/argocd_new_app.png,window=_blank]
 
 * Field the following fields replacing **<username>**, **<argocd_project>**, **<github_user>**, **<argocd_ocp_cluster_api>** and **<user_namespace>** respective parameters provided by the instructor
 
- ** Application Name -> **<username>-jump-app-dev**
- ** Project -> **<argocd_project>**
+ ** Application Name -> **<username>-jump-app-dev** -> *<userxx>-jump-app-dev*. Example: `user01-jump-app-dev`
+ ** Project -> **<argocd_project>** -> {argocd_project}
  ** Sync Policy -> **Automatic**
  ** Repository URL -> **https://github.com/<github_user>/jump-app-gitops.git**
  ** Revision -> **master**
  ** Path -> **.**
- ** Cluster URL -> **<argocd_ocp_cluster_api>**
- ** Namespace -> **<user_namespace>**
+ ** Cluster URL -> **<argocd_ocp_cluster_api>** -> *https://kubernetes.default.svc*
+ ** Namespace -> **<user_namespace>** -> *<userxx>-jump-app-dev*. Example: `user01-jump-app-dev`
+
+
 
 .ArgoCD New App Fields
 image::argocd_new_app_fields.png[link=_images/argocd_new_app_fields.png,window=_blank]
@@ -614,6 +630,12 @@ image::argocd_jumpapp_content_1.png[link=_images/argocd_jumpapp_content_1.png,wi
 
 .ArgoCD Jump App Content II
 image::argocd_jumpapp_content_2.png[link=_images/argocd_jumpapp_content_2.png,window=_blank]
+
+
+.ArgoCD Jump App Details
+image::argocd_app_dev_details_01.png[link=_images/argocd_app_dev_details_01.png,window=_blank]
+
+
 
 [#02-test]
 == Confirm that _Jump App_ is already running in Openshift

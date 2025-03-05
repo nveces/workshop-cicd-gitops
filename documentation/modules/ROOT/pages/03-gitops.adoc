@@ -62,7 +62,7 @@ After the ArgoCD sync process finished, it is interesting to access Openshift Co
 
 Please follow the next steps to verify _Jump App_ microservices changes:
 
-* Access <ocp_cluster_console> (_E.g. https://console-openshift-console.apps.cicdgitopsworkshop.sandbox507.opentlc.com_)
+* Access <ocp_cluster_console> (_E.g. https://console-openshift-console.{openshift_apps_domain}_)
 
 .Openshift Console
 image::ocp_console.png[link=_images/ocp_console.png,window=_blank]
