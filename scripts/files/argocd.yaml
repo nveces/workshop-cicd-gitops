@@ -2,10 +2,20 @@ apiVersion: argoproj.io/v1alpha1
 kind: ArgoCD
 metadata:
   name: argocd
-spec: 
+spec:
   server:
     route:
       enabled: true
+  sso:
+    dex:
+      openShiftOAuth: true
+    provider: dex
+  rbac:
+    defaultPolicy: 'role:readonly'
+    policy: |
+      g, admin, role:admin
+      g, ssoadmin, role:admin
+    scopes: '[name,groups]'
   resourceExclusions: |
     - apiGroups:
       - tekton.dev

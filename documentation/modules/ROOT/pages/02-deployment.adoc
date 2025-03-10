@@ -28,15 +28,15 @@ Regarding preparing this repository, you have a shared repository in GitHub read
 
 * Access https://github.com/nveces/jump-app-gitops[GitHub * Jump App GitOps Repository, window=_blank]
 
-.Acidonper GitOps Repository
+.Nveces GitOps Repository
 image::github_acidonper.png[link=_images/github_acidonper.png,window=_blank]
 
 * Fork the repository
 
-.Acidonper GitOps Repository Fork
+.Nveces GitOps Repository Fork
 image::github_gitops_fork.png[link=_images/github_gitops_fork.png,window=_blank]
 
-.Acidonper GitOps Repository Forked
+.Nveces GitOps Repository Forked
 image::github_gitops_forked.png[link=_images/github_gitops_forked.png,window=_blank]
 
 [#02-repoclone]
@@ -202,7 +202,7 @@ global:
       versions:
         - v1
       type: nodejs
-      gitRepo: https://github.com/acidonper/jump-app-typescrypt-react.git
+      gitRepo: https://github.com/nveces/jump-app-typescrypt-react.git
     back-golang:
       build: dockerfile
       versions:
@@ -223,7 +223,7 @@ global:
       imagestreamNamespace: openshift
       versions:
         - v1
-      gitRepo: https://github.com/acidonper/jump-app-java-springboot.git
+      gitRepo: https://github.com/nveces/jump-app-java-springboot.git
       type: java
 ----
 
@@ -285,6 +285,8 @@ At this point, your should have a repository with a helm chart which is ready to
 Please follow the next steps to deploy _Jump App_ CI/CD Objects:
 
 * Access *ArgoCD console* <argocd_console_url> (URL provided by the instructor at the beginning of this tutorial)
+** *user*: `admin`
+** *password*: it's the 'argocd-cluster' secret from the `userxx-jump-app-argo` namespace.
 
 .ArgoCD Console
 image::argocd_console_cicd.png[link=_images/argocd_console_cicd.png,window=_blank]
@@ -604,6 +606,8 @@ At this point, your should have a GitOps repository with a helm chart which is r
 Please follow the next steps to deploy _Jump App_.
 
 * Access *ArgoCD console* <argocd_console_url> (URL provided by the instructor at the beginning of this tutorial)
+** *user*: `admin`
+** *password*: it's the 'argocd-cluster' secret from the `userxx-jump-app-argo` namespace.
 
 .ArgoCD Console
 image::argocd_console.png[link=_images/argocd_console.png,window=_blank]

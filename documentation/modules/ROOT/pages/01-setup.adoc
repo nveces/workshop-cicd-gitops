@@ -73,8 +73,8 @@ Please review the following list to have an overall understanding about the reso
 - An ArgoCD installation which will allow attendees to deploy applications in a GitOps fashion
 - A Tekton installation that will control the applications lifecycle automatically
 - A set of GitHub repositories that include the templates and automatisms required to deploy a group of applications
-  - https://github.com/acidonper/jump-app-gitops[GitHub - Jump App GitOps Repository,window=_blank]
-  - https://github.com/acidonper/jump-app-helm-charts[GitHub - Jump App Helm Charts,window=_blank]
+  - https://github.com/nveces/jump-app-gitops[GitHub - Jump App GitOps Repository,window=_blank]
+  - https://github.com/nveces/jump-app-helm-charts[GitHub - Jump App Helm Charts,window=_blank]
 
 [#01-parameters]
 === Parameters
@@ -97,7 +97,7 @@ The following table includes the parameters that the instructor should provide y
 | `userXX`
 | Password
 | <pass>
-| `P4ssw0rd`
+| `userXX`
 | App Namespace
 | <user_namespace>
 | `userXX-jump-app-dev`

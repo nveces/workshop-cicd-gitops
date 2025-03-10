@@ -19,17 +19,17 @@ In order to work with a custom _Jump App_ frontend repository, you have a shared
 
 * Login in https://github.com[GitHub]
 
-* Access https://github.com/acidonper/jump-app-typescrypt-react[GitHub - Jump App Frontend based on React Repository]
+* Access https://github.com/nveces/jump-app-typescrypt-react[GitHub - Jump App Frontend based on React Repository]
 
-.Acidonper _Jump App_ Frontend Repository
+.Nveces _Jump App_ Frontend Repository
 image::github_acidonper.png[link=_images/github_acidonper.png,window=_blank]
 
-* Fork the repository
+* Fork the repository (copy it to your own GitHub account all branches)
 
-.Acidonper _Jump App_ Frontend Repository Fork
+.Nveces _Jump App_ Frontend Repository Fork
 image::github_front_fork.png[link=_images/github_front_fork.png,window=_blank]
 
-.Acidonper _Jump App_ Frontend Repository Forked
+.Nveces _Jump App_ Frontend Repository Forked
 image::github_front_forked.png[link=_images/github_front_forked.png,window=_blank]
 
 [#04-repoclone]
@@ -81,7 +81,7 @@ git checkout cicd
 [.console-input]
 [source,input,subs="+macros,+attributes"]
 ----
-sed 's/https:\/\/github.com\/acidonper\/jump-app-typescrypt-react.git/https:\/\/github.com\/<github_user>\/jump-app-typescrypt-react.git/g' -i values.yaml
+sed 's/https:\/\/github.com\/nveces\/jump-app-typescrypt-react.git/https:\/\/github.com\/<github_user>\/jump-app-typescrypt-react.git/g' -i values.yaml
 ----
 
 IMPORTANT: Replace *<github_user>* value with your GitHub username
@@ -274,7 +274,7 @@ git checkout -b develop
 [.console-input]
 [source,input,subs="+macros,+attributes"]
 ----
-sed 's/Jump App v2./Jump App v.2.1 DEV - <username>/g' -i src/ui/header/Header.spec.tsx
+sed 's/Jump App v.2./Jump App v2./g' -i src/ui/header/Header.spec.tsx
 ----
 
 IMPORTANT: Replace *<username>* value with your tutorial username
