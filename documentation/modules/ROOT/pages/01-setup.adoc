@@ -106,7 +106,7 @@ The following table includes the parameters that the instructor should provide y
 | `userXX-jump-app-cicd`
 | Openshift Apps Domain
 | <openshift_apps_domain>
-| _{openshift_apps_domain}_
+| _{openshift_apps_domain_01}_, _{openshift_apps_domain_02}_, _{openshift_apps_domain_03}_
 | ArgoCD console
 | <argocd_console_url>
 | _https://argocd-gitops-argocd.cicdgitopsworkshop.sandbox507.opentlc.com[window=_blank]_

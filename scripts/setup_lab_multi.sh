@@ -6,9 +6,10 @@
 # Users
 ##
 
-num_users=25
+num_users=7
 
 # New USERS array
+#USERS=("user01" "user02" "user03" "user04" "user05" "user06" "user07" "user08" "user09" )
 USERS=()
 
 # populating USERS array
@@ -87,6 +88,7 @@ sleep 60
 ##
 oc apply -f ./scripts/files/redhat_gitops.yaml
 sleep 60
+
 
 for i in ${USERS[@]}
 do

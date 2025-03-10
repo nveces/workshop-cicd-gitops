@@ -288,6 +288,9 @@ Please follow the next steps to deploy _Jump App_ CI/CD Objects:
 ** *user*: `admin`
 ** *password*: it's the 'argocd-cluster' secret from the `userxx-jump-app-argo` namespace.
 
+.Password Secret for the ArgoCD Console Access
+image::argocd_secret_user_01.png[link=_images/argocd_secret_user_01.png,window=_blank]
+
 .ArgoCD Console
 image::argocd_console_cicd.png[link=_images/argocd_console_cicd.png,window=_blank]
 
