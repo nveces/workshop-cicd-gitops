@@ -278,7 +278,7 @@
 <div class="content">
 <a class="image" href="_images/github_acidonper.png" target="_blank" rel="noopener"><img src="_images/github_acidonper.png" alt="github acidonper"></a>
 </div>
-<div class="title">Figure 1. Acidonper GitOps Repository</div>
+<div class="title">Figure 1. Nveces GitOps Repository</div>
 </div>
 <div class="ulist">
 <ul>
@@ -291,13 +291,13 @@
 <div class="content">
 <a class="image" href="_images/github_gitops_fork.png" target="_blank" rel="noopener"><img src="_images/github_gitops_fork.png" alt="github gitops fork"></a>
 </div>
-<div class="title">Figure 2. Acidonper GitOps Repository Fork</div>
+<div class="title">Figure 2. Nveces GitOps Repository Fork</div>
 </div>
 <div class="imageblock">
 <div class="content">
 <a class="image" href="_images/github_gitops_forked.png" target="_blank" rel="noopener"><img src="_images/github_gitops_forked.png" alt="github gitops forked"></a>
 </div>
-<div class="title">Figure 3. Acidonper GitOps Repository Forked</div>
+<div class="title">Figure 3. Nveces GitOps Repository Forked</div>
 </div>
 </div>
 <div class="sect2">
@@ -508,7 +508,7 @@ global:
       versions:
         - v1
       type: nodejs
-      gitRepo: https://github.com/acidonper/jump-app-typescrypt-react.git
+      gitRepo: https://github.com/nveces/jump-app-typescrypt-react.git
     back-golang:
       build: dockerfile
       versions:
@@ -529,7 +529,7 @@ global:
       imagestreamNamespace: openshift
       versions:
         - v1
-      gitRepo: https://github.com/acidonper/jump-app-java-springboot.git
+      gitRepo: https://github.com/nveces/jump-app-java-springboot.git
       type: java</code></pre>
 </div>
 </div>
@@ -627,6 +627,16 @@ It is required to generate a personal access token in order to push the changes 
 <ul>
 <li>
 <p>Access <strong>ArgoCD console</strong> &lt;argocd_console_url&gt; (URL provided by the instructor at the beginning of this tutorial)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>user</strong>: <code>admin</code></p>
+</li>
+<li>
+<p><strong>password</strong>: it&#8217;s the 'argocd-cluster' secret from the <code>userxx-jump-app-argo</code> namespace.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -1121,6 +1131,16 @@ git push origin master</code></pre>
 <ul>
 <li>
 <p>Access <strong>ArgoCD console</strong> &lt;argocd_console_url&gt; (URL provided by the instructor at the beginning of this tutorial)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>user</strong>: <code>admin</code></p>
+</li>
+<li>
+<p><strong>password</strong>: it&#8217;s the 'argocd-cluster' secret from the <code>userxx-jump-app-argo</code> namespace.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
