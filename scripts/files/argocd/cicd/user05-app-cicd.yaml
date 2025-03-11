@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: user05-jump-app-cicd
+  namespace: user05-gitops-argocd
+spec:
+  destination:
+    namespace: user05-jump-app-cicd
+    server: 'https://kubernetes.default.svc'
+  project: jump-app
+  source:
+    path: .
+    repoURL: 'https://github.com/nveces/jump-app-gitops.git'
+    targetRevision: cicd

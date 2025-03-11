@@ -264,7 +264,8 @@ git push origin cicd
 
 
 
-IMPORTANT: It is required to generate a personal access token in order to push the changes via HTTPS
+IMPORTANT: It is required to generate a personal access token in order to push the changes via HTTPS.
+See https://rhte2023-argo-rollouts.github.io/redhat-workshop-deployment-strategies/redhat-workshop-deployment-strategies/01-setup.html#01-cloneGit[Clone the GitOps repository, window=_blank] for more information.
 
 .Student CICD Branch Pushed
 image::github_cicd_pushed.png[link=_images/github_cicd_pushed.png,window=_blank]
@@ -286,7 +287,7 @@ Please follow the next steps to deploy _Jump App_ CI/CD Objects:
 
 * Access *ArgoCD console* <argocd_console_url> (URL provided by the instructor at the beginning of this tutorial)
 ** *user*: `admin`
-** *password*: it's the 'argocd-cluster' secret from the `userxx-jump-app-argo` namespace.
+** *password*: it's the `argocd-cluster` secret from the `userxx-gitops-argocd` namespace, for example: `user01-gitops-argocd`.
 
 .Password Secret for the ArgoCD Console Access
 image::argocd_secret_user_01.png[link=_images/argocd_secret_user_01.png,window=_blank]

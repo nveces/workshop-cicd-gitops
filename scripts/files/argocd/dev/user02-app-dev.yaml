@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: user02-jump-app-dev
+  namespace: user02-gitops-argocd
+spec:
+  destination:
+    namespace: user02-jump-app-dev
+    server: 'https://kubernetes.default.svc'
+  project: jump-app
+  source:
+    path: .
+    repoURL: 'https://github.com/nveces/jump-app-gitops.git'
+    targetRevision: master
+  syncPolicy:
+    automated: {}

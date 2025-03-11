@@ -5,6 +5,8 @@
 :openshift_apps_domain_01: apps.cluster-4kh56.dynamic.redhatworkshops.io
 :openshift_apps_domain_02: apps.cluster-gwtg8.dynamic.redhatworkshops.io
 :openshift_apps_domain_03: apps.cluster-wsjwq.dynamic.redhatworkshops.io
+:openshift_apps_domain_04: apps.cluster-9tbkq.dynamic.redhatworkshops.io
+:openshift_apps_domain_05: apps.cluster-6flrq.dynamic.redhatworkshops.io
 
 :argocd_project: jump-app
 
