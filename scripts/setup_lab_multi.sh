@@ -6,7 +6,7 @@
 # Users
 ##
 
-num_users=7
+num_users=6
 
 # New USERS array
 #USERS=("user01" "user02" "user03" "user04" "user05" "user06" "user07" "user08" "user09" )

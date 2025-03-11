@@ -611,7 +611,8 @@ Please follow the next steps to deploy _Jump App_.
 
 * Access *ArgoCD console* <argocd_console_url> (URL provided by the instructor at the beginning of this tutorial)
 ** *user*: `admin`
-** *password*: it's the 'argocd-cluster' secret from the `userxx-jump-app-argo` namespace.
+** *password*: it's the `argocd-cluster` secret from the `userxx-gitops-argocd` namespace, for example: `user01-gitops-argocd`.
+
 
 .ArgoCD Console
 image::argocd_console.png[link=_images/argocd_console.png,window=_blank]
